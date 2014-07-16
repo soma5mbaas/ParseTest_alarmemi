@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@drawable/ics"
+            android:clickable="true"
+            android:focusable="true" >
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:duplicateParentState="true"
+                android:paddingLeft="11dp"
+                android:paddingTop="4dp"
+                android:src="@drawable/ic_back" />
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:paddingRight="12dp"
+                android:paddingTop="4dp"
+                android:src="@drawable/logo" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1.0" >
+
+        <LinearLayout
+            android:id="@+id/list_box"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="#c9c9c9"
+            android:orientation="vertical"
+            android:padding="16dp" >
+
+            <ScrollView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/rounded" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="16dp" >
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/forest" />
+
+                    <EditText
+                        android:id="@+id/forest_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/textfield"
+                        android:hint="@string/forest_name"
+                        android:singleLine="true" />
+
+                    <EditText
+                        android:id="@+id/forest_pw"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:background="@drawable/textfield"
+                        android:hint="@string/forest_pw"
+                        android:password="true"
+                        android:singleLine="true" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" >
+
+                        <LinearLayout
+                            android:id="@+id/login"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginRight="4dp"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/facebook_button"
+                            android:clickable="true"
+                            android:focusable="true" >
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="9dp"
+                                android:layout_marginTop="9dp"
+                                android:gravity="center"
+                                android:shadowColor="#aa000000"
+                                android:shadowDx="0"
+                                android:shadowDy="-1"
+                                android:shadowRadius="1.0"
+                                android:text="@string/enter_forest"
+                                android:textAllCaps="true"
+                                android:textColor="#ffffff"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/join"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:background="@drawable/facebook_button"
+                            android:clickable="true"
+                            android:focusable="true" >
+
+                            <TextView
+                                android:layout_width="fill_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="9dp"
+                                android:layout_marginTop="9dp"
+                                android:gravity="center"
+                                android:shadowColor="#aa000000"
+                                android:shadowDx="0"
+                                android:shadowDy="-1"
+                                android:shadowRadius="1.0"
+                                android:text="@string/make_forest"
+                                android:textAllCaps="true"
+                                android:textColor="#ffffff"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </ScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/title_bar_shadow" />
+    </FrameLayout>
+
+</LinearLayout>

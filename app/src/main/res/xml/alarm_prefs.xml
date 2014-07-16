@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/set_alarm" >
+
+    <PreferenceCategory android:layout="@layout/preference_category" >
+        <CheckBoxPreference
+            android:key="enabled"
+            android:layout="@layout/preference_rounded"
+            android:persistent="false"
+            android:title="@string/enable_alarm"
+            android:widgetLayout="@layout/preference_checkbox" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="category1"
+        android:layout="@layout/preference_category" >
+        <Preference
+            android:key="time"
+            android:layout="@layout/preference_top_rounded_tag"
+            android:persistent="false" />
+        <Preference
+            android:key="setRepeat"
+            android:layout="@layout/preference_rectangle"
+            android:persistent="false"
+            android:title="@string/alarm_repeat" />
+
+        <CheckBoxPreference
+            android:key="vibrate"
+            android:layout="@layout/preference_rectangle"
+            android:persistent="false"
+            android:title="@string/alarm_vibrate"
+            android:widgetLayout="@layout/preference_checkbox" />
+
+        <Preference
+            android:key="label"
+            android:layout="@layout/preference_rectangle"
+            android:persistent="false"
+            android:title="@string/label" />
+
+        <com.provision.alarmemi.colorpicker.AmbilWarnaPreference
+            android:key="color"
+            android:layout="@layout/preference_rectangle"
+            android:summary="@string/alarm_color_summary"
+            android:title="@string/alarm_color" />
+
+        <Preference
+            android:key="memi_count"
+            android:layout="@layout/preference_rectangle"
+            android:title="@string/memi_count" >
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.provision.alarmemi.MemiCountPreference"
+                android:targetPackage="com.provision.alarmemi" />
+        </Preference>
+        <Preference
+            android:key="snooze_strength"
+            android:layout="@layout/preference_bottom_rounded"
+            android:title="@string/snooze_strength" >
+            <intent
+                android:action="android.intent.action.MAIN"
+                android:targetClass="com.provision.alarmemi.SnoozeStrengthPreference"
+                android:targetPackage="com.provision.alarmemi" />
+        </Preference>
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:key="category2"
+        android:layout="@layout/preference_category" >
+        <Preference
+            android:key="forest_name"
+            android:layout="@layout/preference_top_rounded"
+            android:persistent="false"
+            android:title="@string/select_forest" />
+        <Preference
+            android:key="forest"
+            android:layout="@layout/preference_bottom_rounded"
+            android:persistent="false"
+            android:title="@string/select_device" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:background="#c9c9c9" >
+
+    <LinearLayout
+        android:id="@+id/add_alarm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pref_top_rounded"
+        android:clickable="true"
+        android:focusable="true" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="12dp"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:src="@drawable/ic_add_alarm" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_vertical"
+            android:text="@string/add_alarm"
+            android:textAllCaps="true"
+            android:textColor="#666666"
+            android:textSize="18dp" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:title="@string/settings" >
+
+    <PreferenceCategory android:layout="@layout/preference_category" >
+        <CheckBoxPreference
+            android:key="alarm_in_silent_mode"
+            android:layout="@layout/preference_top_rounded"
+            android:summary="@string/alarm_in_silent_mode_summary"
+            android:title="@string/alarm_in_silent_mode_title"
+            android:widgetLayout="@layout/preference_checkbox" />
+
+        <Preference
+            android:key="snooze_duration"
+            android:layout="@layout/preference_rectangle"
+            android:title="@string/snooze_duration_title" />
+        <Preference
+            android:key="volume_button_setting"
+            android:layout="@layout/preference_rectangle"
+            android:summary="@string/volume_button_setting_summary"
+            android:title="@string/volume_button_setting_title" />
+        <Preference
+            android:key="alarm_limit"
+            android:layout="@layout/preference_bottom_rounded"
+            android:title="@string/alarm_limit_title" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

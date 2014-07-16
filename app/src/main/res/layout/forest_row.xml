@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/pref_rectangle"
+    android:gravity="center_vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="88dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="4dp"
+                android:text="Hello World"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?android:attr/textColorPrimary" />
+
+            <TextView
+                android:id="@+id/my_device"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text=" - Hello World"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="?android:attr/textColorTertiary" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/devices"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="4dp"
+            android:text="Hello World"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="?android:attr/textColorTertiary" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="1px"
+        android:layout_height="fill_parent"
+        android:background="#9c9c9c" />
+
+    <com.provision.alarmemi.DontPressWithParentLayout
+        android:id="@+id/kakao"
+        android:layout_width="48dp"
+        android:layout_height="fill_parent"
+        android:background="@drawable/ics"
+        android:gravity="right|center_vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/kakao" />
+    </com.provision.alarmemi.DontPressWithParentLayout>
+
+    <LinearLayout
+        android:layout_width="1px"
+        android:layout_height="fill_parent"
+        android:background="#9c9c9c" />
+
+    <com.provision.alarmemi.DontPressWithParentLayout
+        android:id="@+id/remove"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:background="@drawable/ics"
+        android:gravity="right|center_vertical" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:src="@drawable/ic_delete" />
+    </com.provision.alarmemi.DontPressWithParentLayout>
+
+</LinearLayout>

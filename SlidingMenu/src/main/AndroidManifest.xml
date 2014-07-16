@@ -1,0 +1,13 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.slidingmenu.lib">
+
+    <application android:allowBackup="true">
+        <uses-library android:name="com.google.android.maps" />
+
+        <activity android:name=".app.SlidingActivity" />
+        <activity android:name=".app.SlidingFragmentActivity" />
+        <activity android:name=".app.SlidingListActivity" />
+        <activity android:name=".app.SlidingPreferenceActivity" />
+    </application>
+
+</manifest>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/picker_top" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/make_forest"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/picker_center"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/forest_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/textfield"
+            android:hint="@string/forest_name"
+            android:minWidth="300dp"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/forest_pw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/textfield"
+            android:hint="@string/forest_pw"
+            android:minWidth="300dp"
+            android:password="true"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/forest_pw_chk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/textfield"
+            android:hint="@string/forest_pw_chk"
+            android:minWidth="300dp"
+            android:password="true"
+            android:singleLine="true" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/picker_bottom" >
+
+        <ImageButton
+            android:id="@+id/ok"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ics"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/picker_accept" />
+
+        <ImageView
+            android:id="@+id/divider"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/picker_divider" />
+
+        <ImageButton
+            android:id="@+id/cancel"
+            android:layout_width="0dip"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/ics"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/picker_cancel" />
+    </LinearLayout>
+
+</LinearLayout>

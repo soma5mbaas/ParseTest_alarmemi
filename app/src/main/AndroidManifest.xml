@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.provision.alarmemi.paper" >
+
+    <permission
+        android:name="com.provision.alarmemi.permission.C2D_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.provision.alarmemi.permission.C2D_MESSAGE" />
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true"
+        android:icon="@drawable/ic_launcher_alarmclock"
+        android:label="@string/app_label"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".LogInForest"
+            android:noHistory="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".FragmentChangeActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".CustomListPreference"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingDialog" />
+        <activity
+            android:name=".RepeatListPreference"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingDialog" />
+        <activity
+            android:name=".CustomEditTextPreference"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingDialog" />
+        <activity
+            android:name=".CustomAlertDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingDialog" />
+        <activity
+            android:name=".RegisterAlertDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingDialog" />
+        <activity
+            android:name=".JoinForestAlertDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingDialog" />
+        <activity
+            android:name=".AlarmContextMenu"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingDialog" />
+        <activity
+            android:name=".colorpicker.AmbilWarnaDialog"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingDialog" />
+        <activity
+            android:name=".Invited"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" >
+            <intent-filter>
+                <data android:scheme="alarmemi" />
+
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <provider
+            android:name=".AlarmProvider"
+            android:authorities="com.provision.alarmemi"
+            android:exported="false" />
+
+        <activity
+            android:name=".AlarmAlert"
+            android:configChanges="orientation|keyboardHidden|keyboard|navigation"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:taskAffinity=""
+            android:theme="@style/alarm_alert" />
+        <activity
+            android:name=".AlarmAlertFullScreen"
+            android:configChanges="orientation|keyboardHidden|keyboard|navigation"
+            android:excludeFromRecents="true"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
+            android:taskAffinity=""
+            android:theme="@style/alarm_alert" />
+
+        <receiver android:name=".AlarmReceiver" >
+            <intent-filter>
+                <action android:name="com.provision.alarmemi.ALARM_ALERT" />
+                <action android:name="alarm_killed" />
+                <action android:name="cancel_snooze" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".HandleSetAlarm"
+            android:excludeFromRecents="true"
+            android:permission="com.android.alarm.permission.SET_ALARM"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.NoDisplay" >
+            <intent-filter>
+                <action android:name="android.intent.action.SET_ALARM" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MemiCountPreference"
+            android:label="@string/memi_count"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingDialog" />
+        <activity
+            android:name=".SnoozeStrengthPreference"
+            android:label="@string/memi_count"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingDialog" />
+        <activity
+            android:name=".SnoozeTest"
+            android:label="@string/memi_count"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingDialog" />
+
+        <service
+            android:name=".AlarmKlaxon"
+            android:description="@string/alarm_klaxon_service_desc" >
+            <intent-filter>
+                <action android:name="com.provision.alarmemi.ALARM_ALERT" />
+            </intent-filter>
+        </service>
+
+        <receiver android:name=".AlarmInitReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.TIME_SET" />
+                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+                <action android:name="android.intent.action.LOCALE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.google.android.gcm.GCMBroadcastReceiver"
+            android:permission="com.google.android.c2dm.permission.SEND" >
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+                <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
+
+                <category android:name="com.provision.alarmemi" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name=".ConnReceiver"
+            android:enabled="true"
+            android:priority="0" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" >
+                </action>
+            </intent-filter>
+        </receiver>
+
+        <service android:name=".GCMIntentService" />
+    </application>
+
+
+</manifest>

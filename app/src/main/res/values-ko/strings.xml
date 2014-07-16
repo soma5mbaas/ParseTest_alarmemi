@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+      Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+  
+          http://www.apache.org/licenses/LICENSE-2.0
+  
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<resources xmlns:android="http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_label" msgid="6674495003718166674">"알람매미"</string>
+    <string name="about_provision">프로비전에 대하여...</string>
+    <string name="help">도움말</string>
+    <string name="exit">끝내기</string>
+    <string name="tip1">반갑습니다!</string>
+    <string name="tip1_sub">옆으로 스와이프해서 다음으로 넘어가세요.</string>
+    <string name="tip2">알람 목록과 현재 시간이 이 화면에 표시됩니다.\n여기서 알람을 만들거나 삭제할 수 있습니다.</string>
+    <string name="tip3">알람이 울리면 매미가 시끄럽게 웁니다.\n매미를 계속 때리면 매미가 가고 알람이 멈춥니다.</string>
+    <string name="tip4">몇분 뒤에 알람이 다시 울리게 하려면\n폰을 세게 흔들면 됩니다. </string>
+    <string name="tip5">끝났습니다!</string>
+    <string name="tip5_sub">이제 매미알람을 사용하실 수 있습니다.</string>
+    <string name="done_button">메인 화면으로 가기</string>
+    <string name="visit_website">웹사이트 방문</string>
+    <string name="dev_vista">김효준 (Vista)</string>
+    <string name="dev_vista_sum">메인테이너 / UI 개발</string>
+    <string name="dev_bdoolgi">박현규(B_DoolGi)</string>
+    <string name="dev_bdoolgi_sum">프로젝트 기획</string>
+    <string name="dev_fleeon">박진서(FleeOn)</string>
+    <string name="dev_fleeon_sum">서버 개발 / 로직 / UI 개발</string>
+    <string name="dev_marutian">신광수(Marutian) </string>
+    <string name="dev_marutian_sum">디자인</string>
+    <string name="dev_steelheart">박기한(SteelHeart)</string>
+    <string name="dev_steelheart_sum">UI 개발</string>
+    <string name="dev_yoke">최주원(York)</string>
+    <string name="dev_yoke_sum">매미 리소스</string>
+    <string name="dev_cheyun">조채연(코딩-로봇)</string>
+    <string name="dev_cheyun_sum">서버 개발 / 음원 제작</string>
+    <string name="alarm_list_title" msgid="7589940465292950600">"알람"</string>
+    <string name="add_alarm" msgid="5976616107390962899">"새 알람 추가&#8230;"</string>
+    <string name="menu_desk_clock" msgid="3241995064554071588">"탁상 시계"</string>
+    <string name="menu_edit_alarm" msgid="7204602994918829751">"알람 수정"</string>
+    <string name="delete_alarm" msgid="3457780990646206817">"알람 삭제"</string>
+    <string name="enable_alarm" msgid="1834599140632142536">"알람 켜기"</string>
+    <string name="disable_alarm" msgid="5889378670229554109">"알람 끄기"</string>
+    <string name="delete_alarm_confirm" msgid="4237696873219106907">"알람이 삭제됩니다."</string>
+    <string name="label" msgid="162189613902857319">"매미 이름"</string>
+    <string name="default_label" msgid="5590025289805630372">"알람"</string>
+    <string name="set_alarm" msgid="9148359866152726808">"알람 설정"</string>
+    <string name="alarm_vibrate" msgid="3476686921490362230">"진동 울리기"</string>
+    <string name="alarm_repeat" msgid="7242985466344233206">"무슨 요일에 울리나요?"</string>
+    <string name="alert" msgid="6539852766423700221">"벨소리"</string>
+    <string name="alarm_alert_dismiss_text" msgid="4942914605480888820">"해제"</string>
+    <string name="alarm_alert_alert_silenced" msgid="7918075929961104202">"<xliff:g id="MINUTES">%d</xliff:g>분 후 알람이 중지됨"</string>
+    <string name="alarm_alert_snooze_text" msgid="1774416052207651584">"다시 울림"</string>
+    <string name="alarm_alert_snooze_set" msgid="656470966696912087">"<xliff:g id="MINUTES">%d</xliff:g>분 동안 알람 일시 중지"</string>
+
+    <string-array name="alarm_set">
+        <item msgid="5163476010406761625">"지금부터 1분 안에 매미가 웁니다."</item>
+        <item msgid="7110525731259629055">"지금부터 <xliff:g id="DAYS">%1$s</xliff:g> 후로 매미가 웁니다."</item>
+        <item msgid="7003982794086186185">"지금부터 <xliff:g id="HOURS">%2$s</xliff:g> 후로 매미가 웁니다."</item>
+        <item msgid="7311021123230077742">"지금부터 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g> 후로 매미가 웁니다."</item>
+        <item msgid="8431715191823114872">"지금부터 <xliff:g id="MINUTES">%3$s</xliff:g> 후로 매미가 웁니다."</item>
+        <item msgid="3244151088673185428">"지금부터 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g> 후로 매미가 웁니다."</item>
+        <item msgid="3663661342600168814">"지금부터 <xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g> 후로 매미가 웁니다."</item>
+        <item msgid="7779544127785487304">"지금부터 <xliff:g id="DAYS">%1$s</xliff:g><xliff:g id="HOURS">%2$s</xliff:g><xliff:g id="MINUTES">%3$s</xliff:g> 후로 매미가 웁니다."</item>
+    </string-array>
+
+    <string name="day" msgid="7984755014526510295">"1일"</string>
+    <string name="days" msgid="2070509222727852210">"<xliff:g id="DAYS">%s</xliff:g>일"</string>
+    <string name="hour" msgid="2546819039651509323">"1시간"</string>
+    <string name="hours" msgid="2071487018566991613">"<xliff:g id="HOURS">%s</xliff:g>시간"</string>
+    <string name="minute" msgid="2486157997434653710">"1분"</string>
+    <string name="minutes" msgid="6115838729146292526">"<xliff:g id="MINUTES">%s</xliff:g>분"</string>
+    <string name="every_day" msgid="1058994798884544691">"매일"</string>
+    <string name="never" msgid="54104287800571769">"안 울림"</string>
+    <string name="day_concat" msgid="971998564991636532">", "</string>
+    <string name="analog_gadget" msgid="1670505720837152766">"아날로그 시계"</string>
+    <string name="settings" msgid="5849739030579520686">"설정"</string>
+    <string name="alarm_in_silent_mode_title" msgid="3892612644543516705">"무음 모드에서 알람 설정"</string>
+    <string name="alarm_in_silent_mode_summary" msgid="6042500263899922832">"무음 모드를 해놔도 매미가 울게 설정합니다."</string>
+    <string name="snooze_duration_title" msgid="1471249885139952670">"나중에 울림 간격"</string>
+    <string name="alarm_limit_title">최대 알람음 작동시간</string>
+    <string name="memi_count">매미를 때리는 횟수</string>
+    <string name="snooze_strength">스누즈하기 위한 흔드는 세기</string>
+
+    <string-array name="alarm_limit_entries">
+        <item>5분</item>
+        <item>15분</item>
+        <item>30분</item>
+        <item>60분</item>
+        <item>90분</item>
+        <item>120분</item>
+        <item>무제한</item>
+    </string-array>
+    <string-array name="snooze_duration_entries">
+        <item msgid="8337408933053603125">"5분"</item>
+        <item msgid="5294206441496024610">"10분"</item>
+        <item msgid="2165904039211935470">"15분"</item>
+        <item msgid="7248236967714374250">"20분"</item>
+        <item msgid="738394723625179423">"25분"</item>
+        <item msgid="1180222611308391616">"30분"</item>
+    </string-array>
+
+    <string name="times">회</string>
+    <string name="done" msgid="6509722361933858451">"완료"</string>
+    <string name="revert" msgid="9100911171235162926">"되돌리기"</string>
+    <string name="delete" msgid="5732434972457000541">"삭제"</string>
+    <string name="alarm_volume_title" msgid="8506245173912428522">"알람 볼륨"</string>
+    <string name="alarm_volume_summary" msgid="8957440373896242438">"알람 볼륨 설정"</string>
+    <string name="silent_alarm_summary" msgid="8605302849408279221">"무음"</string>
+    <string name="alarm_notify_text" msgid="4146350965933990093">"알람을 일시 중지하거나 해제하려면 선택하세요."</string>
+    <string name="alarm_notify_snooze_label" msgid="5404083762646377829">"<xliff:g id="LABEL">%s</xliff:g>(알람 일시 중지됨)"</string>
+    <string name="alarm_notify_snooze_text" msgid="8004830999152609519">"<xliff:g id="TIME">%s</xliff:g>으로 알람이 설정되었습니다. 취소하려면 선택하세요."</string>
+    <string name="volume_button_setting_title" msgid="8155275533660105161">"사이드 버튼 동작"</string>
+    <string name="volume_button_dialog_title" msgid="8768042543750036853">"버튼 효과"</string>
+    <string name="volume_button_setting_summary" msgid="4776447991226047070">"알람이 울릴 때 버튼을 누르면 수행할 동작 설정"</string>
+
+    <string-array name="volume_button_setting_entries">
+        <item msgid="4520420953175098625">"없음"</item>
+        <item msgid="7111908302622811168">"다시 울림"</item>
+        <item msgid="8573552194573068996">"해제"</item>
+    </string-array>
+
+    <string name="alarm_button_description" msgid="740283647046258651">"알람"</string>
+    <string name="gallery_button_description" msgid="1151743663255257668">"갤러리"</string>
+    <string name="music_button_description" msgid="1626593420810117999">"음악"</string>
+    <string name="nightmode_button_description" msgid="990894208217576381">"낮추기"</string>
+    <string name="home_button_description" msgid="3383859096809056157">"Launcher"</string>
+    <string name="desk_clock_button_description" msgid="968868045496561043">"시계 디스플레이"</string>
+    <string name="battery_charging_level" msgid="4391767951302394083">"<xliff:g id="NUMBER">%d</xliff:g><xliff:g id="PERCENT">%%</xliff:g>"</string>
+    <string name="weather_fetch_failure" msgid="7517010911981312358">"현재 날씨 정보를 사용할 수 없습니다."</string>
+    <string name="menu_item_dock_settings" msgid="3524235151132971114">"도킹 설정"</string>
+    <string name="alarm_klaxon_service_desc" msgid="2153290655559916468">"DeskClock에서 설정한 알람에 대한 사운드 재생 서비스"</string>
+    <string name="shaking_at_least">"최소 10번 이상 흔드셔야합니다!"</string>
+    <string name="save_shaking_question">이 세기로 %d번 흔들어서 스누즈를 하시겠습니까?</string>
+    <string name="control_sense">스누즈 감도 조절</string>
+    <string name="control_sense_content">스누즈를 원하시는 횟수와 세기로 흔들고 [적용] 버튼을 눌러주세요.</string>
+    <string name="apply">적용</string>
+    <string name="resetting">재설정</string>
+    <string name="snooze_test">스누즈 감도 테스트</string>
+    <string name="shaking_count">설정 횟수 : </string>
+    <string name="snooze_test_content">설정한 횟수와 세기로 스누즈가 작동하는지 확인하세요.</string>
+    <string name="re">다시하기</string>
+    <string name="ok">확인</string>
+    <string name="forest_name">숲 이름</string>
+    <string name="forest_pw">숲 비밀번호</string>
+    <string name="forest_pw_chk">숲 비밀번호 확인</string>
+    <string name="enter_forest">숲 들어가기</string>
+    <string name="make_forest">숲 만들기</string>
+    <string name="forest_skip">다음에 등록하기</string>
+    <string name="input_forest_name">"숲 이름을 입력하세요!"</string>
+    <string name="input_forest_pw">"숲 비밀번호를 입력하세요!"</string>
+    <string name="make">만들기</string>
+    <string name="cancel">취소</string>
+    <string name="select_device">알람이 울릴 기기 선택</string>
+    <string name="login_error">로그인에 실패하였습니다!</string>
+    <string name="login">로그인</string>
+    <string name="logout">로그아웃</string>
+    <string name="logged_out">로그아웃 되었습니다.</string>
+    <string name="idpw_error">이름 또는 비밀번호가 틀립니다.</string>
+    <string name="server_error">서버에 연결할 수 없습니다.</string>
+    <string name="make_error">숲 만들기 실패</string>
+    <string name="already">이미 존재하는 숲 이름입니다.</string>
+    <string name="mismatch">비밀번호 확인이 일치하지 않습니다.</string>
+    <string name="making">새로운 숲 만드는 중...</string>
+    <string name="tooshort">너무 짧습니다... (4글자 이상)</string>
+    <string name="register">기기 등록</string>
+    <string name="device_name">기기 이름</string>
+    <string name="registering">등록하는 중...</string>
+    <string name="register_failed">등록 실패</string>
+    <string name="connection_chk">인터넷 연결을 확인하세요!</string>
+    <string name="rid_chk">구글 계정에 로그인하여 주세요! (시스템 설정 > 계정 및 동기화)</string>
+    <string name="waiting">기다려주세요...</string>
+    <string name="input_device">"기기명을 입력하세요!"</string>
+    <string name="invite_str">\'%1$s\'님이 \'%2$s\' 숲으로 초대하셨습니다!</string>
+    <string name="forest_out_title">"숲에서 나가기"</string>
+    <string name="forest_out_msg">\'%s\' 숲에서 나가시겠습니까?</string>
+    <string name="accepted">" (수락했습니다.)"</string>
+    <string name="rejected">" (거절했습니다.)"</string>
+    <string name="already_enter">" (이미 들어가있습니다.)"</string>
+    <string name="noname">"이름 없음"</string>
+    <string name="already_entered">\'%s\' 숲에 이미 들어가져 있습니다!</string>
+    <string name="cloud_failed">클라우드 연동 실패</string>
+    <string name="format_member_add">"'%1$s' 숲에 기기(%2$s)가 추가되었습니다."</string>
+    <string name="format_member_remove">"'%1$s' 숲에서 기기(%2$s)가 삭제되었습니다."</string>
+    <string name="format_alarm_add">"'%1$s' 숲에 알람(%2$s)이 추가되었습니다."</string>
+    <string name="format_alarm_edit">"'%1$s' 숲의 알람(%2$s)이 수정되었습니다."</string>
+    <string name="format_alarm_remove">"'%1$s' 숲에서 알람(%2$s)이 삭제되었습니다."</string>
+    <string name="format_forest_invite">"'%1$s'님께서 '%2$s' 숲으로 초대하셨습니다."</string>
+    <string name="dont_save_ask">"변경사항이 저장되지 않았습니다. 그래도 나가시겠습니까?"</string>
+    <string name="select_forest">"숲 선택"</string>
+    <string name="enter_another_forest">다른 숲 들어가기</string>
+    <string name="delete_all_notify">모든 알림 지우기</string>
+    <string name="please_update">"원활한 사용을 위해 Alarmemi를 최신 버젼으로 업데이트 해주세요!"</string>
+    <string name="bann_char">사용할 수 없는 특수문자가 포함되어 있습니다!</string>
+    <string name="notify">알림</string>
+    <string name="menu_main">메인 화면</string>
+    <string name="menu_forest">숲</string>
+    <string name="alarm_color">알람 색깔</string>
+    <string name="alarm_color_summary">(클라우드 알람에서 색깔은 동기화되지 않습니다.)</string>
+
+</resources>

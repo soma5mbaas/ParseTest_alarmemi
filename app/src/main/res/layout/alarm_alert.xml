@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     Copyright (C) 2007 The Android Open Source Project
+
+     Licensed under the Apache License, Version 2.0 (the "License");
+     you may not use this file except in compliance with the License.
+     You may obtain a copy of the License at
+
+          http://www.apache.org/licenses/LICENSE-2.0
+
+     Unless required by applicable law or agreed to in writing, software
+     distributed under the License is distributed on an "AS IS" BASIS,
+     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+     See the License for the specific language governing permissions and
+     limitations under the License.
+-->
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" >
+
+    <ImageView
+        android:id="@+id/background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/wallpaper_default_day"
+        android:scaleType="centerCrop" />
+    <ImageView
+        android:id="@+id/day_background"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@drawable/wallpaper_default_day"
+        android:scaleType="centerCrop" />
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="@color/alert_semitrans"
+        android:scaleType="centerCrop" />
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@drawable/wire_pattern"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/layout_y"
+                android:layout_width="match_parent"
+                android:layout_height="5dp" />
+
+            <LinearLayout
+                android:id="@+id/memi_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.0" >
+
+                <LinearLayout
+                    android:id="@+id/layout_x"
+                    android:layout_width="5dp"
+                    android:layout_height="fill_parent" />
+
+                <ImageButton
+                    android:id="@+id/alarmemi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00000000"
+                    android:src="@drawable/memi" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="25.0dp"
+                android:paddingTop="25.0dp" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp" >
+
+                    <ImageView
+                        android:id="@+id/clock1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:src="@drawable/num0" />
+
+                    <ImageView
+                        android:id="@+id/clock2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:src="@drawable/num9" />
+
+                    <ImageView
+                        android:id="@+id/clock_dot"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:src="@drawable/dotdot" />
+
+                    <ImageView
+                        android:id="@+id/clock3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:src="@drawable/num5" />
+
+                    <ImageView
+                        android:id="@+id/clock4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:src="@drawable/num4" />
+
+                    <ImageView
+                        android:id="@+id/ampm"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_marginLeft="5dp"
+                        android:paddingTop="30dp"
+                        android:src="@drawable/am" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/alertTitle"
+                        style="?android:attr/textAppearanceLarge"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="38dp"
+                        android:layout_marginTop="-2dp"
+                        android:ellipsize="end"
+                        android:shadowColor="#1dffffff"
+                        android:shadowDx="0"
+                        android:shadowDy="2"
+                        android:shadowRadius="1.0"
+                        android:singleLine="true"
+                        android:text="알람 5:46" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

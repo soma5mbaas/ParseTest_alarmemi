@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/picker_top" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="18dp"
+            android:layout_marginTop="10dp"
+            android:minWidth="200dp" >
+
+            <LinearLayout
+                android:id="@+id/color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" >
+
+                <ImageView
+                    android:id="@+id/clock_onoff"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/alarm_on" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/header_time"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="12dip"
+                android:ellipsize="none"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:text="12:04"
+                android:textColor="@android:color/black" />
+
+            <TextView
+                android:id="@+id/header_label"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="4dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:singleLine="true"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/alarm_context_menu_bottom"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/enable_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/ics"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="16dp"
+            android:text="@string/enable_alarm"
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/edit_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/ics"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="16dp"
+            android:text="@string/menu_edit_alarm"
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
+
+        <Button
+            android:id="@+id/delete_alarm"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/ics"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="16dp"
+            android:text="@string/delete_alarm"
+            android:textColor="@android:color/black"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+</LinearLayout>
