@@ -23,7 +23,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.provision.alarmemi.JoinForestAlertDialog.JoinForestAlertDialogListener;
+import com.provision.alarmemi.paper.JoinForestAlertDialog.JoinForestAlertDialogListener;
 
 public class LogInForest extends Activity {
 	EditText forest_name, forest_pw;

@@ -18,7 +18,7 @@ package com.provision.alarmemi.paper;
 
 import java.net.URISyntaxException;
 
-import com.provision.alarmemi.R;
+import com.provision.alarmemi.paper.R;
 
 import android.content.Context;
 import android.content.Intent;

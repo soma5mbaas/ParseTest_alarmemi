@@ -11,7 +11,6 @@ public class BaseActivity extends SlidingFragmentActivity {
 
 	protected Fragment mFrag;
 
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -19,7 +18,7 @@ public class BaseActivity extends SlidingFragmentActivity {
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
 		FragmentTransaction t = this.getSupportFragmentManager().beginTransaction();
-		mFrag = new SlideMenu(this);
+		mFrag = new SlideMenu();
 		t.replace(R.id.menu_frame, mFrag);
 		t.commit();
 

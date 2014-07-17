@@ -54,14 +54,12 @@ import android.widget.Toast;
 import com.provision.alarmemi.paper.CustomAlertDialog.CustomAlertDialogListener;
 import com.slidingmenu.lib.SlidingMenu;
 
-public class MainFragment extends Fragment implements OnGlobalLayoutListener,
-		OnItemClickListener, FragmentChangeActivity.OnLifeCycleChangeListener,
-		OnItemLongClickListener {
+public class MainFragment extends BaseFragment implements OnItemClickListener,
+        OnItemLongClickListener {
 	IntentFilter filter;
 	static Handler progressDismiss = new ProgressDismiss();
 	static boolean isRunning = false, isFirst = true;
 	BroadcastReceiver mReceiver = new BroadcastReceiver() {
-
 		@Override
 		public void onReceive(Context arg0, Intent arg1) {
 			updateTime();
@@ -71,15 +69,13 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 
 	ViewGroup root;
 
-	static SlidingMenu menu;
-
 	private void switchContent(Fragment f) {
-		((FragmentChangeActivity) getActivity()).switchContent(f);
+		mActivity.switchContent(f);
 	}
 
 	private static void setAlarmIntent(Intent i) {
-		((FragmentChangeActivity) context_.getActivity()).setAlarmGetIntent = i;
-		context_.switchContent(new SetAlarmFragment(context, menu));
+		mActivity.setAlarmGetIntent = i;
+		mActivity.switchContent(new SetAlarmFragment());
 	}
 
 	static LinearLayout bkg;
@@ -101,7 +97,7 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
         ampm.setImageResource(c.get(Calendar.AM_PM) == Calendar.AM ? R.drawable.am
                 : R.drawable.pm);
 
-        // context is for 12:00AM.
+        // mActivity is for 12:00AM.
         if (c.get(Calendar.AM_PM) == Calendar.AM && c.get(Calendar.HOUR) == 0) {
             i1.setImageResource(R.drawable.num1);
             i2.setImageResource(R.drawable.num2);
@@ -166,11 +162,11 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 	static Handler toastHandler = new ToastHandler();
 
 	private class AlarmTimeAdapter extends CursorAdapter {
-		public AlarmTimeAdapter(Context context, Cursor cursor) {
-			super(context, cursor);
+		public AlarmTimeAdapter(Context mActivity, Cursor cursor) {
+			super(mActivity, cursor);
 		}
 
-		public View newView(Context context, Cursor cursor, ViewGroup parent) {
+		public View newView(Context mActivity, Cursor cursor, ViewGroup parent) {
 			ViewGroup ret_margin = (ViewGroup) mFactory.inflate(
 					R.layout.alarm_list_item_margin, parent, false);
 
@@ -182,7 +178,7 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 			return ret_margin;
 		}
 
-		public void bindView(View view, final Context context, Cursor cursor) {
+		public void bindView(View view, final Context mActivity, Cursor cursor) {
 			if (cursor.getPosition() == cursor.getCount() - 1) {
 				view.findViewById(R.id.alarm_time).setBackgroundResource(
 						R.drawable.pref_bottom_rounded);
@@ -226,9 +222,9 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 							}
 						}.start();
 					} else {
-						Alarms.enableAlarm(context, alarm.id, !alarm.enabled);
+						Alarms.enableAlarm(mActivity, alarm.id, !alarm.enabled);
 						if (!alarm.enabled) {
-							String toastText = Alarms.formatToast(context,
+							String toastText = Alarms.formatToast(mActivity,
 									Alarms.calculateAlarm(alarm.hour, alarm.minutes, alarm.daysOfWeek).getTimeInMillis());
 							showToast(toastText);
 						}
@@ -250,7 +246,7 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 					.findViewById(R.id.daysOfWeek);
 			daysOfWeekView.setSelected(true);
 
-			final String daysOfWeekStr = alarm.daysOfWeek.toString(context,
+			final String daysOfWeekStr = alarm.daysOfWeek.toString(mActivity,
 					false);
 			if (daysOfWeekStr != null && daysOfWeekStr.length() != 0) {
 				daysOfWeekView.setText(daysOfWeekStr);
@@ -354,25 +350,25 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 					+ "&target_device_uid="
 					+ URLEncoder.encode(tempjson.toString(), "UTF-8") + "&key="
 					+ alarm.cloudKey + "&my_uuid=" + myUUID;
-			result = ServerUtilities.connect(url, context);
+			result = ServerUtilities.connect(url, mActivity);
 		} catch (UnsupportedEncodingException e) {
 			android.util.Log.e("url", e.toString());
 		}
 		if (result == null) {
-			showToast(context.getString(R.string.cloud_failed));
+			showToast(mActivity.getString(R.string.cloud_failed));
 		} else if (result.equals("CONNECTION_FAILED")) {
-			showToast(context.getString(R.string.connection_chk));
+			showToast(mActivity.getString(R.string.connection_chk));
 		} else if (result.equals("FAILED")) {
-			showToast(context.getString(R.string.cloud_failed));
+			showToast(mActivity.getString(R.string.cloud_failed));
 		} else {
 			alarm.cloudDevices = selectedDevice;
 			alarm.cloudUID = tempjson.toString();
-			Alarms.setAlarm(context, alarm);
+			Alarms.setAlarm(mActivity, alarm);
 
-			Alarms.enableAlarm(context, alarm.id, !alarm.enabled);
+			Alarms.enableAlarm(mActivity, alarm.id, !alarm.enabled);
 			if (!alarm.enabled) {
 				String toastText = Alarms.formatToast(
-						context,
+						mActivity,
 						Alarms.calculateAlarm(alarm.hour, alarm.minutes,
 								alarm.daysOfWeek).getTimeInMillis());
 				showToast(toastText);
@@ -389,15 +385,15 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 		}
 		switch (btnId) {
 		case R.id.delete_alarm:
-			new AlertDialogBuilder(context, R.string.delete_alarm,
+			new AlertDialogBuilder(mActivity, R.string.delete_alarm,
 					R.string.delete_alarm_confirm, true,
 					new CustomAlertDialogListener() {
 						@Override
 						public void onOk() {
 							if (alarm.cloudEnabled) {
-								SetAlarmFragment.deleteCloudAlarm(context, alarm);
+								SetAlarmFragment.deleteCloudAlarm(mActivity, alarm);
 							} else
-								Alarms.deleteAlarm(context, alarmId);
+								Alarms.deleteAlarm(mActivity, alarmId);
 						}
 
 						@Override
@@ -417,10 +413,10 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 					}
 				}.start();
 			} else {
-				Alarms.enableAlarm(context, alarm.id, !alarm.enabled);
+				Alarms.enableAlarm(mActivity, alarm.id, !alarm.enabled);
 				if (!alarm.enabled) {
 					String toastText = Alarms.formatToast(
-							context,
+							mActivity,
 							Alarms.calculateAlarm(alarm.hour, alarm.minutes,
 									alarm.daysOfWeek).getTimeInMillis());
 					showToast(toastText);
@@ -456,14 +452,14 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 		@Override
 		public void handleMessage(Message msg) {
 			String result = (String) msg.obj;
-			Toast.makeText(context, result, Toast.LENGTH_SHORT).show();
+			Toast.makeText(mActivity, result, Toast.LENGTH_SHORT).show();
 		}
 	}
 
 	Handler UpdateHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
-			new AlertDialogBuilder(context, R.string.app_name,
+			new AlertDialogBuilder(mActivity, R.string.app_name,
 					R.string.please_update, false,
 					new CustomAlertDialogListener() {
 						@Override
@@ -471,7 +467,7 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 							Intent marketLaunch = new Intent(Intent.ACTION_VIEW);
 							marketLaunch.setData(Uri
 									.parse("market://details?id=com.provision.alarmemi"));
-							context.startActivity(marketLaunch);
+							mActivity.startActivity(marketLaunch);
 						}
 
 						@Override
@@ -482,14 +478,14 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 	};
 
 	public boolean UpdateCheck() {
-		if (!Internet.Check(context))
+		if (!Internet.Check(mActivity))
 			return true;
 		String source = "";
 		PackageInfo pi;
 		String version = "";
 		try {
-			pi = context.getPackageManager().getPackageInfo(
-					context.getPackageName(), 0);
+			pi = mActivity.getPackageManager().getPackageInfo(
+					mActivity.getPackageName(), 0);
 			version = pi.versionName;
 		} catch (NameNotFoundException e) {
 			return true;
@@ -523,18 +519,17 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle b) {
-		((FragmentChangeActivity) getActivity())
-				.setOnLifeCycleChangeListener(this);
+		mActivity.setOnLifeCycleChangeListener(this);
 
 		myUUID = SplashActivity.myUUID;
 
-		mFactory = LayoutInflater.from(context);
-		mCursor = Alarms.getAlarmsCursor(context.getContentResolver());
-		prefs = context.getSharedPreferences("forest", Context.MODE_PRIVATE);
+		mFactory = LayoutInflater.from(mActivity);
+		mCursor = Alarms.getAlarmsCursor(mActivity.getContentResolver());
+		prefs = mActivity.getSharedPreferences("forest", Context.MODE_PRIVATE);
 		new Thread() {
 			@Override
 			public void run() {
-				SlideMenu.GetPush(context);
+				SlideMenu.GetPush(mActivity);
 			}
 		}.start();
 
@@ -571,14 +566,14 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 		filter = new IntentFilter(Intent.ACTION_TIME_TICK);
 		filter.addAction(Intent.ACTION_TIME_TICK);
 		filter.addAction(Intent.ACTION_TIME_CHANGED);
-		context.registerReceiver(mReceiver, filter);
+		mActivity.registerReceiver(mReceiver, filter);
 		updateTime();
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		context.unregisterReceiver(mReceiver);
+		mActivity.unregisterReceiver(mReceiver);
 	}
 
 	static LinearLayout addAlarm;
@@ -627,7 +622,7 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 		mAlarmsList = (ListView) root.findViewById(R.id.alarms_list);
 		mAlarmsList.addHeaderView(alarm_list_header);
 		mAlarmsList.addHeaderView(add_alarm_button);
-		adapter = new AlarmTimeAdapter(context, mCursor);
+		adapter = new AlarmTimeAdapter(mActivity, mCursor);
 		mAlarmsList.setAdapter(adapter);
 		mAlarmsList.setVerticalScrollBarEnabled(true);
 		mAlarmsList.setOnItemClickListener(this);
@@ -711,8 +706,7 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 	public void onBackPressed() {
 		if (ShowcaseView.opened)
 			ShowcaseView.hideShowcase();
-		else
-			((FragmentChangeActivity) getActivity()).finish();
+		else mActivity.finish();
 	}
 
 	@Override
@@ -724,8 +718,8 @@ public class MainFragment extends Fragment implements OnGlobalLayoutListener,
 		final Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.HOUR_OF_DAY, alarm.hour);
 		cal.set(Calendar.MINUTE, alarm.minutes);
-		final String time = Alarms.formatTime(context, cal);
-		Intent intent = new Intent(context, AlarmContextMenu.class);
+		final String time = Alarms.formatTime(mActivity, cal);
+		Intent intent = new Intent(mActivity, AlarmContextMenu.class);
 		intent.putExtra("time", time);
 		intent.putExtra("label", alarm.label);
 		intent.putExtra("color", alarm.color);

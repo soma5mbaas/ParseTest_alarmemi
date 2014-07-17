@@ -22,8 +22,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.provision.alarmemi.Alarm;
-import com.provision.alarmemi.R;
+import com.provision.alarmemi.paper.Alarm;
+import com.provision.alarmemi.paper.R;
 
 /**
  * Dialog to set alarm time.

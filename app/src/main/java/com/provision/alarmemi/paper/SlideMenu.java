@@ -34,7 +34,6 @@ import android.widget.TextView;
 public class SlideMenu extends Fragment {
 
     static SharedPreferences prefs;
-    static Context mContext;
     static String myUUID;
     static NotifyAdapter adapter;
     static ListView mNotifyList;
@@ -56,16 +55,18 @@ public class SlideMenu extends Fragment {
         else
             ((FragmentChangeActivity) getActivity()).switchContent(f);
     }
+    
+    private FragmentChangeActivity mActivity;
 
     @Override
     public View onCreateView(final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        mContext = getActivity();
+        mActivity = (FragmentChangeActivity)getActivity();
 
         handler = new LoginHandler();
         OnNotifyChanged = new onNotifyChangedHandler();
-        prefs = mContext.getSharedPreferences("forest", Context.MODE_PRIVATE);
+        prefs = mActivity.getSharedPreferences("forest", Context.MODE_PRIVATE);
         myUUID = SplashActivity.myUUID;
         ViewGroup root = (ViewGroup) inflater.inflate(R.layout.slide_menu, null);
 
@@ -78,136 +79,86 @@ public class SlideMenu extends Fragment {
         root.findViewById(R.id.menu_main).setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                switchContent(
-                        new MainFragment(
-                                mContext,
-                                ((FragmentChangeActivity) getActivity()).getSlidingMenu()), false
-                );
+                switchContent(new MainFragment(), false);
             }
         });
 
         // Add alarm
-        root.findViewById(R.id.menu_add_alarm).setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                        ((FragmentChangeActivity) getActivity()).setAlarmGetIntent = new Intent();
-                        if (SetAlarmFragment.isRunning)
-                            switchContent(null, true);
-                        else
-                            switchContent(
-                                    new SetAlarmFragment(
-                                            mContext,
-                                            ((FragmentChangeActivity) getActivity())
-                                                    .getSlidingMenu()
-                                    ), true
-                            );
-                    }
-                }
-        );
+        root.findViewById(R.id.menu_add_alarm).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                mActivity.setAlarmGetIntent = new Intent();
+
+                if (SetAlarmFragment.isRunning) switchContent(null, true);
+                else switchContent(new SetAlarmFragment(), true);
+            }
+        });
 
         // Forest Account
-        root.findViewById(R.id.menu_forest).setOnClickListener(
-                new OnClickListener() {
+        root.findViewById(R.id.menu_forest).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                switchContent(new CloudAccountFragment(), false);
+            }
+        });
 
-                    @Override
-                    public void onClick(View arg0) {
-                        switchContent(
-                                new CloudAccountFragment(
-                                        mContext,
-                                        ((FragmentChangeActivity) getActivity())
-                                                .getSlidingMenu()
-                                ), false
-                        );
-                    }
-                }
-        );
-
-        // About Provision
-        root.findViewById(R.id.menu_about).setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                        switchContent(new AboutFragment(mContext, ((FragmentChangeActivity) getActivity())
-                                .getSlidingMenu()), false);
-                    }
-                }
-        );
+        // About
+        root.findViewById(R.id.menu_about).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                switchContent(new AboutFragment(), false);
+            }
+        });
 
         // Settings
-        root.findViewById(R.id.menu_settings).setOnClickListener(
-                new OnClickListener() {
-
-                    @Override
-                    public void onClick(View arg0) {
-                        switchContent(
-                                new SettingsFragment(
-                                        mContext,
-                                        ((FragmentChangeActivity) getActivity())
-                                                .getSlidingMenu()
-                                ), false
-                        );
-                    }
-                }
-        );
+        root.findViewById(R.id.menu_settings).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                switchContent(new SettingsFragment(), false);
+            }
+        });
 
         // Help
-        root.findViewById(R.id.menu_help).setOnClickListener(
-                new OnClickListener() {
+        root.findViewById(R.id.menu_help).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                FragmentChangeActivity.welcomePrefs = "";
+                SharedPreferences.Editor editor = FragmentChangeActivity.prefs.edit();
+                editor.putString("welcome", FragmentChangeActivity.welcomePrefs);
+                editor.commit();
 
-                    @Override
-                    public void onClick(View arg0) {
-                        FragmentChangeActivity.welcomePrefs = "";
-                        SharedPreferences.Editor editor = FragmentChangeActivity.prefs
-                                .edit();
-                        editor.putString("welcome",
-                                FragmentChangeActivity.welcomePrefs);
-                        editor.commit();
-                        switchContent(
-                                new MainFragment(
-                                        mContext,
-                                        ((FragmentChangeActivity) getActivity())
-                                                .getSlidingMenu()
-                                ), false
-                        );
-                    }
-                }
-        );
+                switchContent(new MainFragment(), false);
+            }
+        });
 
         // Exit
-        root.findViewById(R.id.menu_exit).setOnClickListener(
-                new OnClickListener() {
+        root.findViewById(R.id.menu_exit).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                mActivity.finish();
+            }
+        });
 
-                    @Override
-                    public void onClick(View arg0) {
-                        ((Activity) mContext).finish();
-                    }
-                }
-        );
+        root.findViewById(R.id.notify_refresh).setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                new GetDataTask().execute();
+            }
+        });
 
-        root.findViewById(R.id.notify_refresh).setOnClickListener(
-                new OnClickListener() {
-                    @Override
-                    public void onClick(View arg0) {
-                        new GetDataTask().execute();
-                    }
-                }
-        );
-        ic_notify_refresh = (ImageView) root
-                .findViewById(R.id.ic_notify_refresh);
+        ic_notify_refresh = (ImageView) root.findViewById(R.id.ic_notify_refresh);
         MarkAlreadyInvite();
 
         String prefs_notify = prefs.getString("notify", "");
         if (!prefs_notify.equals("")) {
-            List<String> notify_ = Arrays.asList(prefs_notify.substring(0,
-                    prefs_notify.length() - 2).split("\\|\\|"));
+            List<String> notify_ = Arrays.asList(prefs_notify.substring(0, prefs_notify.length() - 2).split("\\|\\|"));
             android.util.Log.d("url", notify_.toString());
             ArrayList<String> notify = new ArrayList<String>(notify_);
-            adapter = new NotifyAdapter(mContext, R.layout.notify_row, notify);
+            adapter = new NotifyAdapter(mActivity, R.layout.notify_row, notify);
             mNotifyList.setAdapter(adapter);
         } else {
             ArrayList<String> notify = new ArrayList<String>();
-            adapter = new NotifyAdapter(mContext, R.layout.notify_row, notify);
+            adapter = new NotifyAdapter(mActivity, R.layout.notify_row, notify);
             mNotifyList.setAdapter(adapter);
         }
 
@@ -332,7 +283,7 @@ public class SlideMenu extends Fragment {
 
         protected String[] doInBackground(Void... params) {
             startRotate.sendEmptyMessage(0);
-            GetPush(mContext);
+            GetPush(mActivity);
             return null;
         }
 
@@ -420,10 +371,12 @@ public class SlideMenu extends Fragment {
     static class NotifyAdapter extends ArrayAdapter<String> {
 
         private ArrayList<String> items;
+        private Context mContext;
 
         public NotifyAdapter(Context context, int textViewResourceId,
                              ArrayList<String> items) {
             super(context, textViewResourceId, items);
+            mContext = context;
             this.items = items;
         }
 
@@ -615,12 +568,8 @@ public class SlideMenu extends Fragment {
             } else if (!result.equals("NOT_AVAILABLE")) {
 
                 try {
-                    switchContent(
-                            new CloudAccountFragment(mContext,
-                                    ((FragmentChangeActivity) getActivity())
-                                            .getSlidingMenu()
-                            ), false
-                    );
+                    switchContent(new CloudAccountFragment(), false);
+
                     // Convert result to json
                     JSONObject json = new JSONObject(result);
                     String name = json.getString("name");
@@ -649,7 +598,7 @@ public class SlideMenu extends Fragment {
                 failed_message = R.string.idpw_error;
             }
             if (failed_message != -1) {
-                new AlertDialogBuilder(mContext, R.string.login_error,
+                new AlertDialogBuilder(mActivity, R.string.login_error,
                         failed_message, false, null);
             }
         }

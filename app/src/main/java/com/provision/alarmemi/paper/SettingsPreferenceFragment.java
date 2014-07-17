@@ -43,15 +43,12 @@ public class SettingsPreferenceFragment extends ListFragment{
     };
     private ListView lv;
     private int xmlId;
-     
-    public SettingsPreferenceFragment(int xmlId){
+
+    public SettingsPreferenceFragment setXmlId(int XmlId) {
         this.xmlId = xmlId;
+        return this;
     }
-    //must be provided
-    public SettingsPreferenceFragment(){
-         
-    }
-     
+
     ViewGroup root;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle b){

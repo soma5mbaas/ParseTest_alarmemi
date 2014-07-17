@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.provision.alarmemi.R;
+import com.provision.alarmemi.paper.R;
 
 public class AmbilWarnaDialog extends Activity {
 	public interface OnAmbilWarnaListener {

@@ -16,7 +16,7 @@
 
 package com.provision.alarmemi.paper;
 
-import com.provision.alarmemi.R;
+import com.provision.alarmemi.paper.R;
 
 import android.content.Context;
 import android.media.Ringtone;

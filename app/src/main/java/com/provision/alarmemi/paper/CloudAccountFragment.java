@@ -37,8 +37,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
-import com.provision.alarmemi.CustomAlertDialog.CustomAlertDialogListener;
-import com.provision.alarmemi.RegisterAlertDialog.RegisterAlertDialogListener;
+import com.provision.alarmemi.paper.CustomAlertDialog.CustomAlertDialogListener;
+import com.provision.alarmemi.paper.RegisterAlertDialog.RegisterAlertDialogListener;
 import com.slidingmenu.lib.SlidingMenu;
 
 public class CloudAccountFragment extends BaseFragment {
@@ -52,19 +52,14 @@ public class CloudAccountFragment extends BaseFragment {
 	static String needToRegister = null;
 	static Handler registerDialog = new RegisterDialog();
 
-	SlidingMenu menu;
-
 	ViewGroup root;
 	static LinearLayout addForest, addForestDivider;
 
 	@Override
-	public View onCreateView(final LayoutInflater inflater,
-			ViewGroup container, Bundle savedInstanceState) {
-		((FragmentChangeActivity) getActivity())
-				.setOnLifeCycleChangeListener(this);
+	public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle s) {
+		mActivity.setOnLifeCycleChangeListener(this);
 
-		prefs = getActivity().getSharedPreferences("forest",
-				Context.MODE_PRIVATE);
+		prefs = mActivity.getSharedPreferences("forest", Context.MODE_PRIVATE);
 		myUUID = SplashActivity.myUUID;
 		registerHandler = new RegisterHandler();
 		refresh_list_handler = new RefreshListHandler();
@@ -73,16 +68,12 @@ public class CloudAccountFragment extends BaseFragment {
 		ViewTreeObserver vto = root.getViewTreeObserver();
 		vto.addOnGlobalLayoutListener(this);
 
-		final ImageView moreAlarm = (ImageView) root
-				.findViewById(R.id.more_alarm);
+		final ImageView moreAlarm = (ImageView) root.findViewById(R.id.more_alarm);
 		FragmentChangeActivity.moreAlarm = moreAlarm;
 		moreAlarm.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				if (menu.isMenuShowing()) {
-					menu.showContent();
-				} else {
-					menu.showMenu(true);
-				}
+				if (menu.isMenuShowing()) menu.showContent();
+				else menu.showMenu(true);
 			}
 		});
 		// Make the entire view selected when focused.
@@ -154,11 +145,10 @@ public class CloudAccountFragment extends BaseFragment {
 	}
 
 	public static void RegisterDevice(final String forest_name) {
-		if (needToRegister == null)
-			return;
+		if (needToRegister == null) return;
 		needToRegister = null;
 
-		GCMRegistrar.checkDevice();
+		GCMRegistrar.checkDevice(mActivity);
 		GCMRegistrar.checkManifest(mActivity);
 
 		FragmentChangeActivity.progressDialog.show();
@@ -174,7 +164,7 @@ public class CloudAccountFragment extends BaseFragment {
 									+ URLEncoder.encode(name, "UTF-8")
 									+ "&password="
 									+ prefs.getString(name + "_password", "")
-									+ "&uid=" + myUUID, context);
+									+ "&uid=" + myUUID, mActivity);
 				} catch (Exception e) {
 					return;
 				}
@@ -205,8 +195,7 @@ public class CloudAccountFragment extends BaseFragment {
 							editor.putString(forest_name + "_deviceName",
 									json.getString("name"));
 							editor.commit();
-							message_result = getAllAboutForest(forest_name,
-									true, null);
+							message_result = getAllAboutForest(forest_name, true, null);
 							refresh_list_handler.sendEmptyMessage(0);
 
 							message_result = "SUCCEED";
@@ -249,13 +238,13 @@ public class CloudAccountFragment extends BaseFragment {
 					if (device_name.length() == 0) {
 						RemoveAccount(forest_name);
 						refresh_list_handler.sendEmptyMessage(0);
-						Toast.makeText(context, R.string.input_device,
+						Toast.makeText(mActivity, R.string.input_device,
 								Toast.LENGTH_SHORT).show();
 						return;
 					} else if (!AlarmUtils.Check(device_name)) {
 						RemoveAccount(forest_name);
 						refresh_list_handler.sendEmptyMessage(0);
-						Toast.makeText(context, R.string.bann_char,
+						Toast.makeText(mActivity, R.string.bann_char,
 								Toast.LENGTH_SHORT).show();
 						return;
 					}
@@ -265,7 +254,7 @@ public class CloudAccountFragment extends BaseFragment {
 						public void run() {
 							String message_result;
 							String result;
-							regId = GCMRegistrar.getRegistrationId(context);
+							regId = GCMRegistrar.getRegistrationId(mActivity);
 							if (regId.equals(""))
 								message_result = "RID_FAILED";
 							else {
@@ -284,7 +273,7 @@ public class CloudAccountFragment extends BaseFragment {
 															device_name,
 															"UTF-8") + "&uid="
 													+ myUUID + "&rid=" + regId,
-											context);
+											mActivity);
 								} catch (Exception e) {
 									return;
 								}
@@ -316,7 +305,7 @@ public class CloudAccountFragment extends BaseFragment {
 					}.start();
 				}
 			};
-			context.startActivity(new Intent(context, RegisterAlertDialog.class));
+			mActivity.startActivity(new Intent(mActivity, RegisterAlertDialog.class));
 		}
 	}
 
@@ -329,7 +318,7 @@ public class CloudAccountFragment extends BaseFragment {
 							+ URLEncoder.encode(forest_name, "UTF-8")
 							+ "&password="
 							+ prefs.getString(forest_name + "_password", ""),
-					context);
+					mActivity);
 		} catch (UnsupportedEncodingException e1) {
 			result = null;
 		}
@@ -354,7 +343,7 @@ public class CloudAccountFragment extends BaseFragment {
 									+ "&owner_password="
 									+ prefs.getString(
 											forest_name + "_password", ""),
-							context);
+							mActivity);
 					if (result == null) {
 						message_result = "FAILED";
 					} else if (result.equals("CONNECTION_FAILED")) {
@@ -400,7 +389,7 @@ public class CloudAccountFragment extends BaseFragment {
 							alarm.cloudUID = json3
 									.getString("target_device_uid");
 							alarm.enabled = alarm.cloudUID.contains(myUUID);
-							Alarms.addAlarm(context, alarm);
+							Alarms.addAlarm(mActivity, alarm);
 						}
 					}
 				} catch (UnsupportedEncodingException e1) {
@@ -444,7 +433,7 @@ public class CloudAccountFragment extends BaseFragment {
 			}
 
 			if (failed_message != -1)
-				new AlertDialogBuilder(context, R.string.register_failed,
+				new AlertDialogBuilder(mActivity, R.string.register_failed,
 						failed_message, true, null);
 		}
 	}
@@ -452,10 +441,12 @@ public class CloudAccountFragment extends BaseFragment {
 	static class ForestAdapter extends ArrayAdapter<String> {
 
 		private ArrayList<String> items;
+        private Context mContext;
 
 		public ForestAdapter(Context context, int textViewResourceId,
 				ArrayList<String> items) {
 			super(context, textViewResourceId, items);
+            mContext = context;
 			this.items = items;
 		}
 
@@ -463,7 +454,7 @@ public class CloudAccountFragment extends BaseFragment {
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View v = convertView;
 			if (v == null) {
-				LayoutInflater vi = (LayoutInflater) context
+				LayoutInflater vi = (LayoutInflater) mContext
 						.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = vi.inflate(R.layout.forest_row, null);
 			}
@@ -487,8 +478,7 @@ public class CloudAccountFragment extends BaseFragment {
 					devices += jsonObj.getString("name") + ", ";
 				}
 			} catch (JSONException e) {
-				Toast.makeText(context, e.toString(), Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
 			}
 			if (!devices.equals(""))
 				devices = devices.substring(0, devices.length() - 2);
@@ -519,12 +509,12 @@ public class CloudAccountFragment extends BaseFragment {
 													+ "_deviceName", ""));
 							metaInfoArray.add(metaInfoAndroid);
 
-							KakaoLink kakaoLink = KakaoLink.getLink(context
+							KakaoLink kakaoLink = KakaoLink.getLink(mContext
 									.getApplicationContext());
 
 							// check, intent is available.
 							if (!kakaoLink.isAvailableIntent()) {
-								Toast.makeText(context,
+								Toast.makeText(mContext,
 										"Not installed KakaoTalk.",
 										Toast.LENGTH_SHORT).show();
 								return;
@@ -542,22 +532,22 @@ public class CloudAccountFragment extends BaseFragment {
 							 */
 							try {
 								kakaoLink.openKakaoAppLink(
-										(Activity) context,
+										(Activity) mContext,
 										"http://www.provisionmod.com/",
 										String.format(
-												context.getString(R.string.invite_str),
+												mActivity.getString(R.string.invite_str),
 												prefs.getString(name
 														+ "_deviceName", ""),
 												name),
-										context.getPackageName(),
-										context.getPackageManager()
+										mContext.getPackageName(),
+										mContext.getPackageManager()
 												.getPackageInfo(
-														context.getPackageName(),
-														0).versionName, context
+														mContext.getPackageName(),
+														0).versionName, mActivity
 												.getString(R.string.app_label),
 										"UTF-8", metaInfoArray);
 							} catch (NameNotFoundException e) {
-								Toast.makeText(context, e.toString(),
+								Toast.makeText(mContext, e.toString(),
 										Toast.LENGTH_SHORT).show();
 							}
 
@@ -569,10 +559,10 @@ public class CloudAccountFragment extends BaseFragment {
 						@Override
 						public void onClick(View arg0) {
 							new AlertDialogBuilder(
-									context,
+									mContext,
 									R.string.forest_out_title,
 									String.format(
-											context.getString(R.string.forest_out_msg),
+											mActivity.getString(R.string.forest_out_msg),
 											name), true,
 									new CustomAlertDialogListener() {
 										@Override
@@ -582,8 +572,7 @@ public class CloudAccountFragment extends BaseFragment {
 											new Thread() {
 												@Override
 												public void run() {
-													regId = GCMRegistrar
-															.getRegistrationId(context);
+													regId = GCMRegistrar.getRegistrationId(mContext);
 													String message_result;
 													if (regId.equals(""))
 														message_result = "RID_FAILED";
@@ -618,7 +607,7 @@ public class CloudAccountFragment extends BaseFragment {
 																					+ myUUID
 																					+ "&rid="
 																					+ regId,
-																			context);
+																			mContext);
 
 															if (result == null) {
 																message_result = "FAILED";
@@ -629,7 +618,7 @@ public class CloudAccountFragment extends BaseFragment {
 
 																Cursor mCursor = Alarms
 																		.getAlarmsCursorWhere(
-																				context.getContentResolver(),
+																				mContext.getContentResolver(),
 																				Alarm.Columns.ALARM_QUERY_COLUMNS,
 																				"cloud_name='"
 																						+ name
@@ -653,7 +642,7 @@ public class CloudAccountFragment extends BaseFragment {
 																				.EnableAlarm(alarm);
 																	}
 																	Alarms.deleteAlarm(
-																			context,
+																			mContext,
 																			alarm.id);
 
 																	mCursor.moveToNext();

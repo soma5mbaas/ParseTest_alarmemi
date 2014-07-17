@@ -16,6 +16,7 @@
 
 package com.provision.alarmemi.paper;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,16 +56,18 @@ public class SettingsFragment extends SettingsPreferenceFragment implements
 	public static final String SHARED_PREFS_NAME = "settings";
 
 	static Context context;
-	SlidingMenu menu;
-	SettingsFragment _this;
+    FragmentChangeActivity mActivity;
+    SlidingMenu menu;
 
-	public SettingsFragment(Context c, SlidingMenu menu) {
-		context = c;
-		this.menu = menu;
-		_this = this;
-	}
 
-	@Override
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = (FragmentChangeActivity) activity;
+        menu = mActivity.getSlidingMenu();
+    }
+
+    @Override
 	public void onCreate(Bundle icicle) {
 
 		super.onCreate(icicle);
@@ -87,13 +90,11 @@ public class SettingsFragment extends SettingsPreferenceFragment implements
 		FragmentChangeActivity.moreAlarm = moreAlarm;
 		moreAlarm.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				if (menu.isMenuShowing()) {
-					menu.showContent();
-				} else {
-					menu.showMenu(true);
-				}
+				if (menu.isMenuShowing()) menu.showContent();
+				else menu.showMenu(true);
 			}
 		});
+
 		// Make the entire view selected when focused.
 		moreAlarm.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 			public void onFocusChange(View v, boolean hasFocus) {
@@ -103,8 +104,7 @@ public class SettingsFragment extends SettingsPreferenceFragment implements
 
 		View.OnClickListener back_click = new View.OnClickListener() {
 			public void onClick(View v) {
-				((FragmentChangeActivity) _this.getActivity())
-						.switchContent(new MainFragment(context, menu));
+				mActivity.switchContent(new MainFragment());
 			}
 		};
 		ImageView b = (ImageView) root.findViewById(R.id.back);
@@ -246,7 +246,6 @@ public class SettingsFragment extends SettingsPreferenceFragment implements
 
 	@Override
 	public void onBackPressed() {
-		((FragmentChangeActivity) _this.getActivity())
-				.switchContent(new MainFragment(context, menu));
+		mActivity.switchContent(new MainFragment());
 	}
 }

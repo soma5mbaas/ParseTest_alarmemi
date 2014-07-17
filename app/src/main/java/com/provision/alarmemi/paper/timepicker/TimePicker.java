@@ -28,8 +28,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.provision.alarmemi.Alarms;
-import com.provision.alarmemi.R;
+import com.provision.alarmemi.paper.Alarms;
+import com.provision.alarmemi.paper.R;
 
 public class TimePicker extends TimerSetupView implements
 		Button.OnClickListener {

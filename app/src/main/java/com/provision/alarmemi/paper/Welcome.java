@@ -6,7 +6,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.view.View;
 
-import com.provision.alarmemi.ShowcaseView.OnClosedListener;
+import com.provision.alarmemi.paper.ShowcaseView.OnClosedListener;
 
 public class Welcome {
 

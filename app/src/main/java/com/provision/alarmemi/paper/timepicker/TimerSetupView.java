@@ -25,7 +25,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-import com.provision.alarmemi.R;
+import com.provision.alarmemi.paper.R;
 
 public class TimerSetupView extends LinearLayout implements
 		Button.OnClickListener {

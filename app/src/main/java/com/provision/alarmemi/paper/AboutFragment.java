@@ -15,11 +15,8 @@ import android.widget.LinearLayout;
 
 import com.slidingmenu.lib.SlidingMenu;
 
-public class AboutFragment extends Fragment implements OnGlobalLayoutListener,
-		FragmentChangeActivity.OnLifeCycleChangeListener {
+public class AboutFragment extends BaseFragment {
 
-	SlidingMenu menu;
-    FragmentChangeActivity mActivity;
 	ViewGroup root;
 
 	@Override
@@ -55,7 +52,7 @@ public class AboutFragment extends Fragment implements OnGlobalLayoutListener,
 
 		View.OnClickListener back_click = new View.OnClickListener() {
 			public void onClick(View v) {
-				mActivity.switchContent();
+				mActivity.switchContent(new MainFragment());
 			}
 		};
 		ImageView b = (ImageView) root.findViewById(R.id.back);
@@ -94,11 +91,4 @@ public class AboutFragment extends Fragment implements OnGlobalLayoutListener,
 		ViewTreeObserver obs = root.getViewTreeObserver();
 		obs.removeGlobalOnLayoutListener(this);
 	}
-
-	@Override
-	public void onBackPressed() {
-		((FragmentChangeActivity) _this.getActivity())
-				.switchContent(new MainFragment(context, menu));
-	}
-
 }

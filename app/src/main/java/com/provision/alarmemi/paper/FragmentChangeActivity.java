@@ -130,7 +130,7 @@ public class FragmentChangeActivity extends BaseActivity implements
 			mContent = getSupportFragmentManager().getFragment(
 					savedInstanceState, "mContent");
 		if (mContent == null)
-			mContent = new MainFragment(this, getSlidingMenu());
+			mContent = new MainFragment();
 
 		// set the Above View
 		setContentView(R.layout.content_frame);
@@ -143,7 +143,7 @@ public class FragmentChangeActivity extends BaseActivity implements
 		// set the Behind View
 		setBehindContentView(R.layout.menu_frame);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.menu_frame, new SlideMenu(this))
+				.replace(R.id.menu_frame, new SlideMenu())
 				.commitAllowingStateLoss();
 
 		getSlidingMenu().setOnPageDraggingListener(

@@ -29,6 +29,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
@@ -52,17 +53,18 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.provision.alarmemi.CustomAlertDialog.CustomAlertDialogListener;
-import com.provision.alarmemi.colorpicker.AmbilWarnaPreference;
-import com.provision.alarmemi.timepicker.AlarmTimePickerDialog;
-import com.provision.alarmemi.timepicker.AlarmTimePickerDialog.AlarmTimePickerDialogHandler;
+import com.provision.alarmemi.paper.CustomAlertDialog.CustomAlertDialogListener;
+import com.provision.alarmemi.paper.colorpicker.AmbilWarnaPreference;
+import com.provision.alarmemi.paper.timepicker.AlarmTimePickerDialog;
+import com.provision.alarmemi.paper.timepicker.AlarmTimePickerDialog.AlarmTimePickerDialogHandler;
+
 import com.slidingmenu.lib.SlidingMenu;
 
 public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 		AlarmTimePickerDialogHandler,
-		SettingsPreferenceFragment.OnPreferenceAttachedListener,
-		SharedPreferences.OnSharedPreferenceChangeListener,
-		FragmentChangeActivity.OnLifeCycleChangeListener {
+        FragmentChangeActivity.OnLifeCycleChangeListener,
+        SettingsPreferenceFragment.OnPreferenceAttachedListener,
+		SharedPreferences.OnSharedPreferenceChangeListener {
 	static final String KEY_MEMI_COUNT = "memi_count";
 	static final String KEY_SNOOZE_STRENGTH = "snooze_strength";
 
@@ -101,24 +103,26 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 
 	static Handler toastHandler = new ToastHandler();
 	static Handler finishHandler = new FinishHandler();
-	public static Context context;
-	static SetAlarmFragment _this;
 
 	static int memi_count, snooze_strength, snooze_count;
 
 	ViewGroup root;
+    static FragmentChangeActivity mActivity;
 	static SlidingMenu menu;
 	static boolean runSelf = false;
+    
+    static SetAlarmFragment mInstance;
 
-	public SetAlarmFragment(Context c, SlidingMenu menu) {
-		context = c;
-		this.menu = menu;
-		_this = this;
-	}
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        mActivity = (FragmentChangeActivity) activity;
+        menu = mActivity.getSlidingMenu();
+        mInstance = this;
+    }
 
-	public static void finish() {
-		((FragmentChangeActivity) _this.getActivity())
-				.switchContent(new MainFragment(context, menu));
+    public static void finish() {
+		mActivity.switchContent(new MainFragment());
 	}
 
 	/**
@@ -142,8 +146,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 	public void onDetach() {
 		super.onDetach();
 		if (runSelf) {
-			((FragmentChangeActivity) _this.getActivity())
-					.switchContent(new SetAlarmFragment(context, menu));
+			mActivity.switchContent(new SetAlarmFragment());
 			runSelf = false;
 		}
 	}
@@ -154,27 +157,21 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 			if (mode) {
 				if (isSetAlarm) {
 					runSelf = true;
-					((FragmentChangeActivity) _this.getActivity())
-							.switchContent(new NothingFragment());
-				} else
-					((FragmentChangeActivity) _this.getActivity())
-							.switchContent(fragment);
+					mActivity.switchContent(new NothingFragment());
+				} else mActivity.switchContent(fragment);
 			} else
 				finish();
 			return;
 		}
-		new AlertDialogBuilder(context, R.string.app_name,
+		new AlertDialogBuilder(mActivity, R.string.app_name,
 				R.string.dont_save_ask, true, new CustomAlertDialogListener() {
 					@Override
 					public void onOk() {
 						if (mode) {
 							if (isSetAlarm) {
 								runSelf = true;
-								((FragmentChangeActivity) _this.getActivity())
-										.switchContent(new NothingFragment());
-							} else
-								((FragmentChangeActivity) _this.getActivity())
-										.switchContent(fragment);
+								mActivity.switchContent(new NothingFragment());
+							} else mActivity.switchContent(fragment);
 						} else
 							finish();
 					}
@@ -202,10 +199,8 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 	}
 
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle bundle) {
-		((FragmentChangeActivity) getActivity())
-				.setOnLifeCycleChangeListener(this);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle bundle) {
+		mActivity.setOnLifeCycleChangeListener(this);
 
 		isChanged = isCloud = false;
 		// Override the default content view.
@@ -341,8 +336,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 										DateUtils.LENGTH_LONG),
 								DateUtils.getDayOfWeekString(Calendar.SUNDAY,
 										DateUtils.LENGTH_LONG) };
-						Intent intent = new Intent(context,
-								RepeatListPreference.class);
+						Intent intent = new Intent(mActivity, RepeatListPreference.class);
 						intent.putExtra("key", mRepeatPref.getKey());
 						intent.putExtra("title", mRepeatPref.getTitle());
 						intent.putExtra("lists", values);
@@ -354,9 +348,9 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 		mForestName = findPreference("forest_name");
 		mForest = findPreference("forest");
 		mColorPref = (AmbilWarnaPreference) findPreference("color");
-		prefs = context.getSharedPreferences("forest", Context.MODE_PRIVATE);
+		prefs = mActivity.getSharedPreferences("forest", mActivity.MODE_PRIVATE);
 
-		Intent i = ((FragmentChangeActivity) context).setAlarmGetIntent;
+		Intent i = mActivity.setAlarmGetIntent;
 		mId = i.getIntExtra(Alarms.ALARM_ID, -1);
 
 		alarm = null;
@@ -366,7 +360,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 			isChanged = true;
 		} else {
 			// * load alarm details from database
-			alarm = Alarms.getAlarm(context.getContentResolver(), mId);
+			alarm = Alarms.getAlarm(mActivity.getContentResolver(), mId);
 			// Bad alarm, bail to avoid a NPE.
 			if (alarm == null) {
 				finish();
@@ -514,7 +508,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 
 	private void showListPreference(String key, CharSequence title,
 			String[] lists, String defaultValue, boolean isMultiChoice) {
-		Intent intent = new Intent(context, CustomListPreference.class);
+		Intent intent = new Intent(mActivity, CustomListPreference.class);
 		intent.putExtra("key", key);
 		intent.putExtra("title", title);
 		intent.putExtra("lists", lists);
@@ -526,7 +520,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 
 	private void showEditTextPreference(String key, CharSequence title,
 			String defaultValue) {
-		Intent intent = new Intent(context, CustomEditTextPreference.class);
+		Intent intent = new Intent(mActivity, CustomEditTextPreference.class);
 		intent.putExtra("key", key);
 		intent.putExtra("title", title);
 		intent.putExtra("default", defaultValue);
@@ -641,7 +635,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 		mLabel.setSummary(alarm.label);
 		mHour = alarm.hour;
 		mMinutes = alarm.minutes;
-		RepeatListPreference.setDaysOfWeek(context, alarm.daysOfWeek);
+		RepeatListPreference.setDaysOfWeek(mActivity, alarm.daysOfWeek);
 		mVibratePref.setChecked(alarm.vibrate);
 		mForestName.setSummary(alarm.cloudName);
 		mForest.setSummary(alarm.cloudDevices);
@@ -653,14 +647,14 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 	}
 
 	public static void updateMemiCount() {
-		_this.findPreference(KEY_MEMI_COUNT).setSummary(
+		mInstance.findPreference(KEY_MEMI_COUNT).setSummary(
 				(memi_count - 2) + " ~ " + (memi_count + 2)
-						+ context.getString(R.string.times));
+						+ mActivity.getString(R.string.times));
 	}
 
 	public static void updateSnoozeStrength() {
-		_this.findPreference(KEY_SNOOZE_STRENGTH).setSummary(
-				snooze_count + context.getString(R.string.times));
+		mInstance.findPreference(KEY_SNOOZE_STRENGTH).setSummary(
+				snooze_count + mActivity.getString(R.string.times));
 	}
 
 	@Override
@@ -675,7 +669,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 
 	private void showTimePicker() {
 		AlarmTimePickerDialog timePickerDialog = new AlarmTimePickerDialog(
-				context, R.style.SettingDialog);
+				mActivity, R.style.SettingDialog);
 		timePickerDialog.setAlarmTimePickerDialogHandler(this);
 		timePickerDialog.setOnCancelListener(new OnCancelListener() {
 			@Override
@@ -686,24 +680,6 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 		timePickerDialog.show();
 	}
 
-	@Override
-	public void onDialogTimeSet(Alarm alarm, int hourOfDay, int minute) {
-		// onTimeSet is called when the user clicks "Set"
-		mTimePickerCancelled = false;
-		mHour = hourOfDay;
-		mMinutes = minute;
-		updateTime();
-		// If the time has been changed, enable the alarm.
-		if (!isCloud) {
-			if (!mEnabledPref.isChecked()) {
-				showCategory();
-			}
-			mEnabledPref.setChecked(true);
-		}
-		// Save the alarm and pop a toast.
-		isChanged = true;
-		// popAlarmSetToast(this, saveAlarm());
-	}
 
 	private void updateTime() {
 		Calendar c = Alarms.calculateAlarm(mHour, mMinutes,
@@ -719,7 +695,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 			return;
 		}
 		if (!AlarmUtils.Check(mLabelText)) {
-			Toast.makeText(context, R.string.bann_char, Toast.LENGTH_SHORT)
+			Toast.makeText(mActivity, R.string.bann_char, Toast.LENGTH_SHORT)
 					.show();
 			return;
 		}
@@ -748,23 +724,43 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 			alarm.color = mColorPref.getValue();
 
 			if (alarm.id == -1) {
-				Alarms.addAlarm(context, alarm);
+				Alarms.addAlarm(mActivity, alarm);
 				// addAlarm populates the alarm with the new id. Update mId so
 				// that
 				// changes to other preferences update the new alarm.
 				mId = alarm.id;
 			} else {
-				Alarms.setAlarm(context, alarm);
+				Alarms.setAlarm(mActivity, alarm);
 			}
 			finish();
 		}
 	}
 
-	class AlarmAddThread extends Thread {
+    @Override
+    public void onDialogTimeSet(Alarm alarm, int hourOfDay, int minute) {
+        // onTimeSet is called when the user clicks "Set"
+        mTimePickerCancelled = false;
+        mHour = hourOfDay;
+        mMinutes = minute;
+        updateTime();
+        // If the time has been changed, enable the alarm.
+        if (!isCloud) {
+            if (!mEnabledPref.isChecked()) {
+                showCategory();
+            }
+            mEnabledPref.setChecked(true);
+        }
+        // Save the alarm and pop a toast.
+        isChanged = true;
+        // popAlarmSetToast(this, saveAlarm());
+    }
+
+
+    class AlarmAddThread extends Thread {
 		@Override
 		public void run() {
-			SharedPreferences prefs = context.getSharedPreferences("forest",
-					Context.MODE_PRIVATE);
+			SharedPreferences prefs = mActivity.getSharedPreferences("forest",
+					mActivity.MODE_PRIVATE);
 			String result = null;
 			String cloud_name = wasCloud ? mOriginalAlarm.cloudName
 					: names[nameCheckedIndex];
@@ -797,9 +793,9 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 								: mLabelText, "UTF-8")
 						+ (wasCloud ? "&key=" + mOriginalAlarm.cloudKey : "")
 						+ "&my_uuid=" + myUUID;
-				result = ServerUtilities.connect(url, context);
+				result = ServerUtilities.connect(url, mActivity);
 			} catch (UnsupportedEncodingException e) {
-				Toast.makeText(context, e.toString(), Toast.LENGTH_LONG).show();
+				Toast.makeText(mActivity, e.toString(), Toast.LENGTH_LONG).show();
 			}
 			// Result?
 			if (result == null) {
@@ -830,13 +826,13 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 				alarm.color = mColorPref.getValue();
 
 				if (alarm.id == -1) {
-					Alarms.addAlarm(context, alarm);
+					Alarms.addAlarm(mActivity, alarm);
 					// addAlarm populates the alarm with the new id. Update mId
 					// so that
 					// changes to other preferences update the new alarm.
 					mId = alarm.id;
 				} else {
-					Alarms.setAlarm(context, alarm);
+					Alarms.setAlarm(mActivity, alarm);
 				}
 				finishHandler.sendEmptyMessage(0);
 			}
@@ -857,7 +853,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 		public void handleMessage(Message msg) {
 			String result = (String) msg.obj;
 			Log.d("result", result);
-			Toast.makeText(SetAlarmFragment.context, result, Toast.LENGTH_SHORT).show();
+			Toast.makeText(SetAlarmFragment.mActivity, result, Toast.LENGTH_SHORT).show();
 		}
 	}
 
@@ -881,10 +877,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 		new Thread() {
 			@Override
 			public void run() {
-				if (prefs == null) {
-					prefs = c.getSharedPreferences("forest",
-							Context.MODE_PRIVATE);
-				}
+				if (prefs == null) prefs = c.getSharedPreferences("forest", Context.MODE_PRIVATE);
 				String url = null;
 				try {
 					url = "http://alarmemi.appspot.com/alarmemi/alarm/remove?owner_name="
@@ -915,15 +908,15 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 	}
 
 	private void deleteAlarm() {
-		new AlertDialogBuilder(context, R.string.delete_alarm,
+		new AlertDialogBuilder(mActivity, R.string.delete_alarm,
 				R.string.delete_alarm_confirm, true,
 				new CustomAlertDialogListener() {
 					@Override
 					public void onOk() {
 						if (wasCloud)
-							deleteCloudAlarm(context, mOriginalAlarm);
+							deleteCloudAlarm(mActivity, mOriginalAlarm);
 						else
-							Alarms.deleteAlarm(context, mId);
+							Alarms.deleteAlarm(mActivity, mId);
 						finish();
 					}
 
@@ -939,7 +932,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 	 */
 	static void popAlarmSetToast(Context context, int hour, int minute,
 			Alarm.DaysOfWeek daysOfWeek) {
-		popAlarmSetToast(context,
+		popAlarmSetToast(mActivity,
 				Alarms.calculateAlarm(hour, minute, daysOfWeek)
 						.getTimeInMillis());
 	}

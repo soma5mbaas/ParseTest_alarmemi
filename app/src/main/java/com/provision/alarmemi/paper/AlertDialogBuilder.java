@@ -3,7 +3,7 @@ package com.provision.alarmemi.paper;
 import android.content.Context;
 import android.content.Intent;
 
-import com.provision.alarmemi.CustomAlertDialog.CustomAlertDialogListener;
+import com.provision.alarmemi.paper.CustomAlertDialog.CustomAlertDialogListener;
 
 public class AlertDialogBuilder {
 	AlertDialogBuilder(Context context, String title, String content,

@@ -16,7 +16,7 @@
 
 package com.provision.alarmemi.paper;
 
-import static com.provision.alarmemi.CommonUtilities.SENDER_ID;
+import static com.provision.alarmemi.paper.CommonUtilities.SENDER_ID;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;

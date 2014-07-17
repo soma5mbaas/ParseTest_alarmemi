@@ -1,7 +1,7 @@
 package com.provision.alarmemi.paper.colorpicker;
 
-import com.provision.alarmemi.R;
-import com.provision.alarmemi.colorpicker.AmbilWarnaDialog.OnAmbilWarnaListener;
+import com.provision.alarmemi.paper.R;
+import com.provision.alarmemi.paper.colorpicker.AmbilWarnaDialog.OnAmbilWarnaListener;
 
 import android.content.Context;
 import android.content.Intent;

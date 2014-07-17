@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
+import com.slidingmenu.lib.SlidingMenu;
+
 /**
  *  FragmentChangeActivity에 붙은 Fragment들의 베이스이다.
  */
@@ -16,7 +18,8 @@ public class BaseFragment extends Fragment implements
         ViewTreeObserver.OnGlobalLayoutListener,
         FragmentChangeActivity.OnLifeCycleChangeListener {
 
-    protected FragmentChangeActivity mActivity;
+    protected static FragmentChangeActivity mActivity;
+    protected static SlidingMenu menu;
 
     @Override public void onGlobalLayout() { }
     @Override public void onWindowFocusChanged(boolean hasFocus) { }
@@ -25,6 +28,7 @@ public class BaseFragment extends Fragment implements
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         mActivity = (FragmentChangeActivity) activity;
+        menu = mActivity.getSlidingMenu();
     }
 
     @Override
