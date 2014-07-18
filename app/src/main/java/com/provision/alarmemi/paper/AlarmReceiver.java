@@ -26,6 +26,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Parcel;
 
+import com.provision.alarmemi.paper.fragments.SetAlarmFragment;
+
 /**
  * Glue class: connects AlarmAlert IntentReceiver to AlarmAlert activity. Passes
  * through Alarm ID.

@@ -9,7 +9,6 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,6 +29,16 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.provision.alarmemi.paper.fragments.AboutFragment;
+import com.provision.alarmemi.paper.fragments.CloudAccountFragment;
+import com.provision.alarmemi.paper.fragments.FragmentChangeActivity;
+import com.provision.alarmemi.paper.fragments.MainFragment;
+import com.provision.alarmemi.paper.fragments.SetAlarmFragment;
+import com.provision.alarmemi.paper.fragments.SettingsFragment;
+import com.provision.alarmemi.paper.ui.AlertDialogBuilder;
+import com.provision.alarmemi.paper.utils.Notify;
+import com.provision.alarmemi.paper.utils.ServerUtilities;
 
 public class SlideMenu extends Fragment {
 
@@ -189,7 +198,7 @@ public class SlideMenu extends Fragment {
 
     static boolean isPushing = false;
 
-    static boolean GetPush(Context context) {
+    public static boolean GetPush(Context context) {
         if (isPushing)
             return false;
         isPushing = true;

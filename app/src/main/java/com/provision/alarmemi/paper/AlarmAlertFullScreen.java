@@ -60,6 +60,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.provision.alarmemi.paper.fragments.SettingsFragment;
+
 /**
  * Alarm Clock alarm alert: pops visible indicator and plays alarm tone. This
  * activity is the full screen version which shows over the lock screen with the

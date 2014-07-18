@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.provision.alarmemi.paper.utils.Notify;
+
 public class Invited extends Activity {
 
 	@Override

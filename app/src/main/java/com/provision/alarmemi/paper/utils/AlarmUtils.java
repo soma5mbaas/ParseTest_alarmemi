@@ -1,4 +1,4 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.utils;
 
 
 public class AlarmUtils {

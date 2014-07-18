@@ -33,6 +33,8 @@ import android.os.Parcel;
 import android.provider.Settings;
 import android.text.format.DateFormat;
 
+import com.provision.alarmemi.paper.fragments.MainFragment;
+
 /**
  * The Alarms provider supplies info about Alarm Clock settings
  */
@@ -153,13 +155,13 @@ public class Alarms {
 				null, null);
 	}
 
-	static Cursor getAlarmsCursorWhere(ContentResolver contentResolver,
+	public static Cursor getAlarmsCursorWhere(ContentResolver contentResolver,
 			String select[], String where) {
 		return contentResolver.query(Alarm.Columns.CONTENT_URI,
 				select, where, null, null);
 	}
 
-	static ContentValues createContentValues(Alarm alarm) {
+	public static ContentValues createContentValues(Alarm alarm) {
 		ContentValues values = new ContentValues(14);
 		// Set the alarm_time value if this alarm does not repeat. This will be
 		// used later to disable expire alarms.
@@ -413,10 +415,9 @@ public class Alarms {
 	/**
 	 * Disables alert in AlarmManger and StatusBar.
 	 * 
-	 * @param id
 	 *            Alarm ID.
 	 */
-	static void disableAlert(Context context) {
+	public static void disableAlert(Context context) {
 		AlarmManager am = (AlarmManager) context
 				.getSystemService(Context.ALARM_SERVICE);
 		PendingIntent sender = PendingIntent.getBroadcast(context, 0,
@@ -427,7 +428,7 @@ public class Alarms {
 		saveNextAlarm(context, "");
 	}
 
-	static void saveSnoozeAlert(final Context context, final int id,
+	public static void saveSnoozeAlert(final Context context, final int id,
 			final long time) {
 		SharedPreferences prefs = context.getSharedPreferences(
 				MainFragment.PREFERENCES, 0);
@@ -446,7 +447,7 @@ public class Alarms {
 	/**
 	 * Disable the snooze alert if the given id matches the snooze id.
 	 */
-	static void disableSnoozeAlert(final Context context, final int id) {
+	public static void disableSnoozeAlert(final Context context, final int id) {
 		SharedPreferences prefs = context.getSharedPreferences(
 				MainFragment.PREFERENCES, 0);
 		int snoozeId = prefs.getInt(PREF_SNOOZE_ID, -1);
@@ -515,7 +516,7 @@ public class Alarms {
 		context.sendBroadcast(alarmChanged);
 	}
 
-	static long calculateAlarm(Alarm alarm) {
+	public static long calculateAlarm(Alarm alarm) {
 		return calculateAlarm(alarm.hour, alarm.minutes, alarm.daysOfWeek)
 				.getTimeInMillis();
 	}
@@ -524,7 +525,7 @@ public class Alarms {
 	 * Given an alarm in hours and minutes, return a time suitable for setting
 	 * in AlarmManager.
 	 */
-	static Calendar calculateAlarm(int hour, int minute,
+	public static Calendar calculateAlarm(int hour, int minute,
 			Alarm.DaysOfWeek daysOfWeek) {
 
 		// start with now
@@ -549,14 +550,14 @@ public class Alarms {
 		return c;
 	}
 
-	static String formatTime(final Context context, int hour, int minute,
+	public static String formatTime(final Context context, int hour, int minute,
 			Alarm.DaysOfWeek daysOfWeek) {
 		Calendar c = calculateAlarm(hour, minute, daysOfWeek);
 		return formatTime(context, c);
 	}
 
 	/* used by AlarmAlert */
-	static String formatTime(final Context context, Calendar c) {
+	public static String formatTime(final Context context, Calendar c) {
 		String format = get24HourMode(context) ? M24 : M12;
 		return (c == null) ? "" : (String) DateFormat.format(format, c);
 	}
@@ -573,7 +574,7 @@ public class Alarms {
 	 * Save time of the next alarm, as a formatted string, into the system
 	 * settings so those who care can make use of it.
 	 */
-	static void saveNextAlarm(final Context context, String timeString) {
+	public static void saveNextAlarm(final Context context, String timeString) {
 		Settings.System.putString(context.getContentResolver(),
 				Settings.System.NEXT_ALARM_FORMATTED, timeString);
 	}
@@ -588,7 +589,7 @@ public class Alarms {
 	/**
 	 * format "Alarm set for 2 days 7 hours and 53 minutes from now"
 	 */
-	static String formatToast(Context context, long timeInMillis) {
+	public static String formatToast(Context context, long timeInMillis) {
 		long delta = timeInMillis - System.currentTimeMillis();
 		long hours = delta / (1000 * 60 * 60);
 		long minutes = delta / (1000 * 60) % 60;

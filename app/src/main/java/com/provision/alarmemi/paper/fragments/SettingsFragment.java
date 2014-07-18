@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,6 +34,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.provision.alarmemi.paper.CustomListPreference;
+import com.provision.alarmemi.paper.R;
 import com.slidingmenu.lib.SlidingMenu;
 
 /**
@@ -47,9 +49,9 @@ public class SettingsFragment extends SettingsPreferenceFragment implements
 	private static final int ALARM_STREAM_TYPE_BIT = 1 << AudioManager.STREAM_ALARM;
 
 	private static final String KEY_ALARM_IN_SILENT_MODE = "alarm_in_silent_mode";
-	static final String KEY_ALARM_SNOOZE = "snooze_duration";
-	static final String KEY_VOLUME_BEHAVIOR = "volume_button_setting";
-	static final String KEY_ALARM_LIMIT = "alarm_limit";
+    public static final String KEY_ALARM_SNOOZE = "snooze_duration";
+    public static final String KEY_VOLUME_BEHAVIOR = "volume_button_setting";
+    public static final String KEY_ALARM_LIMIT = "alarm_limit";
 	static SettingsPreferenceFragment _context;
 	static SharedPreferences sharedPref;
 
@@ -121,8 +123,8 @@ public class SettingsFragment extends SettingsPreferenceFragment implements
 		final String[] snooze_values = getResources().getStringArray(
 				R.array.snooze_duration_values);
 		snooze.setSummary(CustomListPreference.getEntryOfValue(
-				sharedPref.getString(snooze.getKey(), "10"), snooze_lists,
-				snooze_values));
+                sharedPref.getString(snooze.getKey(), "10"), snooze_lists,
+                snooze_values));
 		snooze.setOnPreferenceClickListener(new OnPreferenceClickListener() {
 			@Override
 			public boolean onPreferenceClick(Preference preference) {

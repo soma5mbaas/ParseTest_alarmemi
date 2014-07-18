@@ -1,4 +1,4 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.utils;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

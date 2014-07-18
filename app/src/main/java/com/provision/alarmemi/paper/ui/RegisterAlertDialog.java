@@ -1,10 +1,12 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.ui;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+
+import com.provision.alarmemi.paper.R;
 
 public class RegisterAlertDialog extends Activity {
 	public interface RegisterAlertDialogListener {

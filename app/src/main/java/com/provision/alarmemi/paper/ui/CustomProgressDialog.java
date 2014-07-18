@@ -1,10 +1,12 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.ui;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.RotateAnimation;
+
+import com.provision.alarmemi.paper.R;
 
 public class CustomProgressDialog extends Dialog {
 

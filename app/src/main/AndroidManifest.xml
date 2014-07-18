@@ -26,6 +26,7 @@
         android:largeHeap="true"
         android:icon="@drawable/ic_launcher_alarmclock"
         android:label="@string/app_label"
+        android:name=".MainApplication"
         android:theme="@style/AppTheme">
         <activity
             android:name=".SplashActivity"
@@ -44,7 +45,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name=".FragmentChangeActivity"
+            android:name=".fragments.FragmentChangeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
@@ -60,11 +61,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/SettingDialog" />
         <activity
-            android:name=".CustomAlertDialog"
+            android:name=".ui.CustomAlertDialog"
             android:screenOrientation="portrait"
             android:theme="@style/SettingDialog" />
         <activity
-            android:name=".RegisterAlertDialog"
+            android:name=".ui.RegisterAlertDialog"
             android:screenOrientation="portrait"
             android:theme="@style/SettingDialog" />
         <activity

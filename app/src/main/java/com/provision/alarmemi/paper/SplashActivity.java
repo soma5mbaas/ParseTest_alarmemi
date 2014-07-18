@@ -16,7 +16,7 @@
 
 package com.provision.alarmemi.paper;
 
-import static com.provision.alarmemi.paper.CommonUtilities.SENDER_ID;
+import static com.provision.alarmemi.paper.utils.CommonUtilities.GCM_SENDER_ID;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -27,13 +27,16 @@ import android.os.Message;
 import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
+import com.provision.alarmemi.paper.fragments.CloudAccountFragment;
+import com.provision.alarmemi.paper.fragments.FragmentChangeActivity;
+import com.provision.alarmemi.paper.utils.ServerUtilities;
 
 // SplashActivity
 // - Splash of the Provision Alarmemi
 public class SplashActivity extends Activity {
 	boolean paused = false;
-	static int versionCode = 0;
-	static String myUUID = null;
+	public static int versionCode = 0;
+	public static String myUUID = null;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -51,7 +54,7 @@ public class SplashActivity extends Activity {
 
 		CloudAccountFragment.regId = GCMRegistrar.getRegistrationId(this);
 		if (CloudAccountFragment.regId.equals("")) {
-			GCMRegistrar.register(this, SENDER_ID);
+			GCMRegistrar.register(this, GCM_SENDER_ID);
 		}
 
 		handler.sendEmptyMessageDelayed(0, 900);

@@ -1,4 +1,4 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.fragments;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -21,14 +21,12 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -37,19 +35,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gcm.GCMRegistrar;
-import com.provision.alarmemi.paper.CustomAlertDialog.CustomAlertDialogListener;
-import com.provision.alarmemi.paper.RegisterAlertDialog.RegisterAlertDialogListener;
-import com.slidingmenu.lib.SlidingMenu;
+import com.provision.alarmemi.paper.Alarm;
+import com.provision.alarmemi.paper.utils.AlarmUtils;
+import com.provision.alarmemi.paper.Alarms;
+import com.provision.alarmemi.paper.ui.AlertDialogBuilder;
+import com.provision.alarmemi.paper.ui.CustomAlertDialog.CustomAlertDialogListener;
+import com.provision.alarmemi.paper.utils.KakaoLink;
+import com.provision.alarmemi.paper.LogInForest;
+import com.provision.alarmemi.paper.R;
+import com.provision.alarmemi.paper.ui.RegisterAlertDialog;
+import com.provision.alarmemi.paper.ui.RegisterAlertDialog.RegisterAlertDialogListener;
+import com.provision.alarmemi.paper.utils.ServerUtilities;
+import com.provision.alarmemi.paper.ui.ShowcaseView;
+import com.provision.alarmemi.paper.SplashActivity;
+import com.provision.alarmemi.paper.Welcome;
 
 public class CloudAccountFragment extends BaseFragment {
 	static SharedPreferences prefs;
 	static Handler registerHandler;
-	static String regId = "";
+	public static String regId = "";
 	static String myUUID;
-	static Handler refresh_list_handler;
+    public static Handler refresh_list_handler;
 	static ForestAdapter adapter;
 	static ListView mForestsList;
-	static String needToRegister = null;
+	public static String needToRegister = null;
 	static Handler registerDialog = new RegisterDialog();
 
 	ViewGroup root;
@@ -160,11 +169,12 @@ public class CloudAccountFragment extends BaseFragment {
 				try {
 					String name = forest_name;
 					result = ServerUtilities.connect(
-							"http://alarmemi.appspot.com/alarmemi/forest/getdevice?name="
-									+ URLEncoder.encode(name, "UTF-8")
-									+ "&password="
-									+ prefs.getString(name + "_password", "")
-									+ "&uid=" + myUUID, mActivity);
+                            "http://alarmemi.appspot.com/alarmemi/forest/getdevice?name="
+                                    + URLEncoder.encode(name, "UTF-8")
+                                    + "&password="
+                                    + prefs.getString(name + "_password", "")
+                                    + "&uid=" + myUUID, mActivity
+                    );
 				} catch (Exception e) {
 					return;
 				}
@@ -686,7 +696,7 @@ public class CloudAccountFragment extends BaseFragment {
 		}
 	}
 
-	static void onForestChanged() {
+    public static void onForestChanged() {
 		ArrayList<String> forests;
 		if (!prefs.getString("name", "").equals("")) {
 			List<String> forests_ = Arrays.asList(prefs.getString("name", "")

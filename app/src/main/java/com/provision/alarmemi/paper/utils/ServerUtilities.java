@@ -1,4 +1,4 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.utils;
 
 import java.io.InputStream;
 import java.math.BigInteger;
@@ -17,6 +17,8 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 import android.telephony.TelephonyManager;
+
+import com.provision.alarmemi.paper.SplashActivity;
 
 public class ServerUtilities {
 	public static String connect(String url, Context context) {

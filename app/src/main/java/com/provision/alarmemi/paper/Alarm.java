@@ -183,7 +183,7 @@ public final class Alarm implements Parcelable {
 		// Used when filtering enabled alarms.
 		public static final String WHERE_ENABLED = ENABLED + "=1";
 
-		static final String[] ALARM_QUERY_COLUMNS = { _ID, HOUR, MINUTES,
+		public static final String[] ALARM_QUERY_COLUMNS = { _ID, HOUR, MINUTES,
 				DAYS_OF_WEEK, ALARM_TIME, ENABLED, VIBRATE, MESSAGE, ALERT,
 				CLOUD_ENABLED, CLOUD_NAME, CLOUD_DEVICES, CLOUD_KEY, CLOUD_UID,
 				MEMI_COUNT, SNOOZE_STRENGTH, SNOOZE_COUNT, COLOR, NO_DIALOG };
@@ -332,7 +332,7 @@ public final class Alarm implements Parcelable {
 	 * Tuesday 0x04: Wednesday 0x08: Thursday 0x10: Friday 0x20: Saturday 0x40:
 	 * Sunday
 	 */
-	static final class DaysOfWeek {
+	public static final class DaysOfWeek {
 
 		private static int[] DAY_MAP = new int[] { Calendar.MONDAY,
 				Calendar.TUESDAY, Calendar.WEDNESDAY, Calendar.THURSDAY,
@@ -341,7 +341,7 @@ public final class Alarm implements Parcelable {
 		// Bitmask of all repeating days
 		private int mDays;
 
-		DaysOfWeek(int days) {
+		public DaysOfWeek(int days) {
 			mDays = days;
 		}
 

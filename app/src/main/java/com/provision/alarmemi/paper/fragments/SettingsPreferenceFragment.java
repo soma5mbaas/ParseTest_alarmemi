@@ -1,4 +1,4 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.fragments;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.Preference;
-import android.preference.PreferenceGroup;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 import android.support.v4.app.ListFragment;
@@ -20,7 +19,9 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ListView;
 
-public class SetAlarmPreferenceFragment extends ListFragment{
+import com.provision.alarmemi.paper.R;
+
+public class SettingsPreferenceFragment extends ListFragment{
      
     private PreferenceManager mPreferenceManager;
      
@@ -44,14 +45,11 @@ public class SetAlarmPreferenceFragment extends ListFragment{
     private ListView lv;
     private int xmlId;
 
-    protected void setXmlIds(int xmlId){
+    public SettingsPreferenceFragment setXmlId(int XmlId) {
         this.xmlId = xmlId;
+        return this;
     }
-    //must be provided
-    public SetAlarmPreferenceFragment(){
-         
-    }
-     
+
     ViewGroup root;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle b){
@@ -70,9 +68,10 @@ public class SetAlarmPreferenceFragment extends ListFragment{
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
-        if(b != null) xmlId = b.getInt("xml");
+        if(b != null)
+            xmlId = b.getInt("xml");
         mPreferenceManager = onCreatePreferenceManager();
-        root = (ViewGroup) LayoutInflater.from(getActivity()).inflate(R.layout.set_alarm, null);
+        root = (ViewGroup) LayoutInflater.from(getActivity()).inflate(R.layout.settings, null);
         lv = (ListView) root.findViewById(android.R.id.list);
         lv.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         addPreferencesFromResource(xmlId);

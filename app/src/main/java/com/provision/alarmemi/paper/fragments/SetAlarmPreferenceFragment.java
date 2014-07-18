@@ -1,4 +1,4 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.fragments;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
@@ -20,7 +20,9 @@ import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.widget.ListView;
 
-public class SettingsPreferenceFragment extends ListFragment{
+import com.provision.alarmemi.paper.R;
+
+public class SetAlarmPreferenceFragment extends ListFragment{
      
     private PreferenceManager mPreferenceManager;
      
@@ -44,11 +46,14 @@ public class SettingsPreferenceFragment extends ListFragment{
     private ListView lv;
     private int xmlId;
 
-    public SettingsPreferenceFragment setXmlId(int XmlId) {
+    protected void setXmlIds(int xmlId){
         this.xmlId = xmlId;
-        return this;
     }
-
+    //must be provided
+    public SetAlarmPreferenceFragment(){
+         
+    }
+     
     ViewGroup root;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle b){
@@ -67,10 +72,9 @@ public class SettingsPreferenceFragment extends ListFragment{
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
-        if(b != null)
-            xmlId = b.getInt("xml");
+        if(b != null) xmlId = b.getInt("xml");
         mPreferenceManager = onCreatePreferenceManager();
-        root = (ViewGroup) LayoutInflater.from(getActivity()).inflate(R.layout.settings, null);
+        root = (ViewGroup) LayoutInflater.from(getActivity()).inflate(R.layout.set_alarm, null);
         lv = (ListView) root.findViewById(android.R.id.list);
         lv.setScrollBarStyle(View.SCROLLBARS_INSIDE_OVERLAY);
         addPreferencesFromResource(xmlId);

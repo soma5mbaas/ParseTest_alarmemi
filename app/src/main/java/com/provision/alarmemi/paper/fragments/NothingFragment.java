@@ -1,4 +1,4 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.fragments;
 
 import android.support.v4.app.Fragment;
 

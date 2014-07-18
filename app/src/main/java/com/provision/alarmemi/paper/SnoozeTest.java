@@ -12,6 +12,8 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.provision.alarmemi.paper.fragments.SetAlarmFragment;
+
 public class SnoozeTest extends Activity implements SensorEventListener {
 
 	private long lastTime, lastTime2;

@@ -1,1 +1,0 @@
-package com.provision.alarmemi.paper;public final class CommonUtilities {	static final String SENDER_ID = "317893043028"; // GCM Project ID}

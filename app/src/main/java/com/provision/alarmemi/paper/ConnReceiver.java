@@ -9,6 +9,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 
+import com.provision.alarmemi.paper.utils.Internet;
+import com.provision.alarmemi.paper.utils.ServerUtilities;
+
 public class ConnReceiver extends BroadcastReceiver {
 
 	static void RemoveNotRemoved(final Context context) {

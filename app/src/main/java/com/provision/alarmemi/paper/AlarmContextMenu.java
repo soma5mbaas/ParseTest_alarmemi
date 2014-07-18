@@ -11,6 +11,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.provision.alarmemi.paper.fragments.MainFragment;
+
 public class AlarmContextMenu extends Activity implements OnClickListener {
 	int position;
 

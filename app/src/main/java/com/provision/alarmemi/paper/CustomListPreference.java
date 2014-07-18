@@ -14,6 +14,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.provision.alarmemi.paper.fragments.SetAlarmFragment;
+import com.provision.alarmemi.paper.fragments.SettingsFragment;
+
 public class CustomListPreference extends Activity {
 
 	String key;

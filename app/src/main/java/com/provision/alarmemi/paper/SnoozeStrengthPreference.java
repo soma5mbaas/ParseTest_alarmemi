@@ -13,7 +13,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.provision.alarmemi.paper.CustomAlertDialog.CustomAlertDialogListener;
+import com.provision.alarmemi.paper.ui.AlertDialogBuilder;
+import com.provision.alarmemi.paper.ui.CustomAlertDialog.CustomAlertDialogListener;
+import com.provision.alarmemi.paper.fragments.SetAlarmFragment;
 
 public class SnoozeStrengthPreference extends Activity implements
 		SensorEventListener {

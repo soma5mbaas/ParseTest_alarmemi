@@ -1,15 +1,17 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.utils;
 
 import android.content.Context;
 
+import com.provision.alarmemi.paper.R;
+
 public class Notify {
-	final static String ALARM_ADD = "alarmadd:";
-	final static String ALARM_EDIT = "alarmedit:";
-	final static String ALARM_REMOVE = "alarmremove:";
-	final static String MEMBER_ADD = "memberadd:";
-	final static String MEMBER_REMOVE = "memberremove:";
-	final static String FOREST_INVITE = "forestinvite:";
-	final static String[] MESSAGES = { ALARM_ADD, ALARM_EDIT, ALARM_REMOVE,
+	public final static String ALARM_ADD = "alarmadd:";
+	public final static String ALARM_EDIT = "alarmedit:";
+	public final static String ALARM_REMOVE = "alarmremove:";
+	public final static String MEMBER_ADD = "memberadd:";
+	public final static String MEMBER_REMOVE = "memberremove:";
+	public final static String FOREST_INVITE = "forestinvite:";
+	public final static String[] MESSAGES = { ALARM_ADD, ALARM_EDIT, ALARM_REMOVE,
 			MEMBER_ADD, MEMBER_REMOVE, FOREST_INVITE };
 
 

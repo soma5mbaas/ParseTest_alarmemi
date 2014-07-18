@@ -1,4 +1,4 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +19,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.provision.alarmemi.paper.BaseActivity;
+import com.provision.alarmemi.paper.ui.CustomProgressDialog;
+import com.provision.alarmemi.paper.R;
+import com.provision.alarmemi.paper.ui.ShowcaseView;
+import com.provision.alarmemi.paper.SlideMenu;
+import com.provision.alarmemi.paper.Welcome;
 import com.slidingmenu.lib.SlidingMenu.OnClosedListener;
 import com.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 import com.slidingmenu.lib.SlidingMenu.OnPageDraggingListener;
@@ -27,7 +33,7 @@ public class FragmentChangeActivity extends BaseActivity implements
 		SettingsPreferenceFragment.OnPreferenceAttachedListener,
 		SetAlarmPreferenceFragment.OnPreferenceAttachedListener {
 
-	Intent setAlarmGetIntent;
+    public Intent setAlarmGetIntent;
 
 	public interface OnLifeCycleChangeListener {
 		public void onWindowFocusChanged(boolean hasFocus);
@@ -46,8 +52,8 @@ public class FragmentChangeActivity extends BaseActivity implements
 	static Context context;
 
 	static ImageView moreAlarm;
-	static SharedPreferences prefs;
-	static String welcomePrefs;
+	public static SharedPreferences prefs;
+	public static String welcomePrefs;
 	float maxScrolledOffset, tempOffset = 0;
 	public static CustomProgressDialog progressDialog;
 
@@ -103,7 +109,7 @@ public class FragmentChangeActivity extends BaseActivity implements
 		return output;
 	}
 
-	static Handler OnNotifyArrived = new Handler() {
+	public static Handler OnNotifyArrived = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			int noti_cnt = GetNotiCnt();

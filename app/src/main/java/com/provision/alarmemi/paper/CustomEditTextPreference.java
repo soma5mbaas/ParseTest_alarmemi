@@ -8,6 +8,8 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.provision.alarmemi.paper.fragments.SetAlarmFragment;
+
 public class CustomEditTextPreference extends Activity {
 
 	String key;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.ui;
 
 import android.content.Context;
 import android.graphics.Typeface;

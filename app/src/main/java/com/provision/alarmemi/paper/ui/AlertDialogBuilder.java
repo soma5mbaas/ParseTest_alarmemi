@@ -1,9 +1,10 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.ui;
 
 import android.content.Context;
 import android.content.Intent;
 
-import com.provision.alarmemi.paper.CustomAlertDialog.CustomAlertDialogListener;
+import com.provision.alarmemi.paper.ui.CustomAlertDialog;
+import com.provision.alarmemi.paper.ui.CustomAlertDialog.CustomAlertDialogListener;
 
 public class AlertDialogBuilder {
 	AlertDialogBuilder(Context context, String title, String content,
@@ -16,7 +17,7 @@ public class AlertDialogBuilder {
 		context.startActivity(intent);
 	}
 
-	AlertDialogBuilder(Context context, int title, int content,
+	public AlertDialogBuilder(Context context, int title, int content,
 			boolean cancelable, CustomAlertDialogListener listener) {
 		this(context, context.getString(title), context.getString(content),
 				cancelable, listener);
@@ -27,7 +28,7 @@ public class AlertDialogBuilder {
 		this(context, title, context.getString(content), cancelable, listener);
 	}
 
-	AlertDialogBuilder(Context context, int title, String content,
+	public AlertDialogBuilder(Context context, int title, String content,
 			boolean cancelable, CustomAlertDialogListener listener) {
 		this(context, context.getString(title), content, cancelable, listener);
 	}

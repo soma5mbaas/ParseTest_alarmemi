@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.fragments;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -53,7 +53,18 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.provision.alarmemi.paper.CustomAlertDialog.CustomAlertDialogListener;
+import com.provision.alarmemi.paper.Alarm;
+import com.provision.alarmemi.paper.utils.AlarmUtils;
+import com.provision.alarmemi.paper.Alarms;
+import com.provision.alarmemi.paper.ui.AlertDialogBuilder;
+import com.provision.alarmemi.paper.ui.CustomAlertDialog.CustomAlertDialogListener;
+import com.provision.alarmemi.paper.CustomEditTextPreference;
+import com.provision.alarmemi.paper.CustomListPreference;
+import com.provision.alarmemi.paper.R;
+import com.provision.alarmemi.paper.RepeatListPreference;
+import com.provision.alarmemi.paper.utils.ServerUtilities;
+import com.provision.alarmemi.paper.SplashActivity;
+import com.provision.alarmemi.paper.ToastMaster;
 import com.provision.alarmemi.paper.colorpicker.AmbilWarnaPreference;
 import com.provision.alarmemi.paper.timepicker.AlarmTimePickerDialog;
 import com.provision.alarmemi.paper.timepicker.AlarmTimePickerDialog.AlarmTimePickerDialogHandler;
@@ -99,12 +110,12 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 
 	private static Alarm alarm;
 	private static SharedPreferences prefs;
-	static boolean isChanged = false, isRunning = false;
+    public static boolean isChanged = false, isRunning = false;
 
 	static Handler toastHandler = new ToastHandler();
 	static Handler finishHandler = new FinishHandler();
 
-	static int memi_count, snooze_strength, snooze_count;
+    public static int memi_count, snooze_strength, snooze_count;
 
 	ViewGroup root;
     static FragmentChangeActivity mActivity;
@@ -942,7 +953,7 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
 						.getTimeInMillis());
 	}
 
-	static void popAlarmSetToast(Context context, long timeInMillis) {
+    public static void popAlarmSetToast(Context context, long timeInMillis) {
 		String toastText = Alarms.formatToast(context, timeInMillis);
 		Toast toast = Toast.makeText(context, toastText, Toast.LENGTH_LONG);
 		ToastMaster.setToast(toast);

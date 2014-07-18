@@ -29,6 +29,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 
+import com.provision.alarmemi.paper.fragments.MainFragment;
+import com.provision.alarmemi.paper.fragments.SetAlarmFragment;
+
 public class HandleSetAlarm extends Activity {
 
     @Override

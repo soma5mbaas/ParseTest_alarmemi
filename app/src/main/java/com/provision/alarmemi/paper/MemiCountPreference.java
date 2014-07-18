@@ -9,6 +9,8 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
+import com.provision.alarmemi.paper.fragments.SetAlarmFragment;
+
 public class MemiCountPreference extends Activity {
 
 	public void onCreate(Bundle savedInstanceState) {

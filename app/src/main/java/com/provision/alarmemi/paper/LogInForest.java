@@ -24,6 +24,11 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.provision.alarmemi.paper.JoinForestAlertDialog.JoinForestAlertDialogListener;
+import com.provision.alarmemi.paper.fragments.CloudAccountFragment;
+import com.provision.alarmemi.paper.ui.AlertDialogBuilder;
+import com.provision.alarmemi.paper.ui.CustomProgressDialog;
+import com.provision.alarmemi.paper.utils.AlarmUtils;
+import com.provision.alarmemi.paper.utils.ServerUtilities;
 
 public class LogInForest extends Activity {
 	EditText forest_name, forest_pw;
@@ -141,8 +146,9 @@ public class LogInForest extends Activity {
 			// Connect to the server - to answer the "it's already available?"
 			// :p
 			String result = ServerUtilities.connect(
-					"http://alarmemi.appspot.com/alarmemi/forest/available?name="
-							+ id, context);
+                    "http://alarmemi.appspot.com/alarmemi/forest/available?name="
+                            + id, context
+            );
 			android.util.Log.d("Alarmemi", result);
 
 			if (result == null) {

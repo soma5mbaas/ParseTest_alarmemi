@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.ui;
 
 import android.content.Context;
 import android.util.AttributeSet;

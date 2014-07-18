@@ -6,7 +6,9 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.view.View;
 
-import com.provision.alarmemi.paper.ShowcaseView.OnClosedListener;
+import com.provision.alarmemi.paper.ui.ShowcaseView;
+import com.provision.alarmemi.paper.ui.ShowcaseView.OnClosedListener;
+import com.provision.alarmemi.paper.fragments.FragmentChangeActivity;
 
 public class Welcome {
 
@@ -21,7 +23,7 @@ public class Welcome {
 		View view;
 		boolean firstScreen;
 
-		WelcomeContent(final int id, final String title,
+		public WelcomeContent(final int id, final String title,
 				final String detailText, final View view,
 				final boolean firstScreen) {
 			this.id = id;

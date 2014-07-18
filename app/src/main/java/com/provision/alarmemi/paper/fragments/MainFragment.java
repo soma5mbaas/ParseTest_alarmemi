@@ -1,4 +1,4 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.fragments;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -38,7 +38,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
@@ -51,8 +50,20 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.provision.alarmemi.paper.CustomAlertDialog.CustomAlertDialogListener;
-import com.slidingmenu.lib.SlidingMenu;
+import com.provision.alarmemi.paper.Alarm;
+import com.provision.alarmemi.paper.AlarmContextMenu;
+import com.provision.alarmemi.paper.Alarms;
+import com.provision.alarmemi.paper.ui.AlertDialogBuilder;
+import com.provision.alarmemi.paper.ui.CustomAlertDialog.CustomAlertDialogListener;
+import com.provision.alarmemi.paper.DigitalClock;
+import com.provision.alarmemi.paper.utils.Internet;
+import com.provision.alarmemi.paper.R;
+import com.provision.alarmemi.paper.utils.ServerUtilities;
+import com.provision.alarmemi.paper.ui.ShowcaseView;
+import com.provision.alarmemi.paper.SlideMenu;
+import com.provision.alarmemi.paper.SplashActivity;
+import com.provision.alarmemi.paper.ToastMaster;
+import com.provision.alarmemi.paper.Welcome;
 
 public class MainFragment extends BaseFragment implements OnItemClickListener,
         OnItemLongClickListener {
@@ -143,7 +154,7 @@ public class MainFragment extends BaseFragment implements OnItemClickListener,
 		return (int) px;
 	}
 
-	static final String PREFERENCES = "AlarmClock";
+	public static final String PREFERENCES = "AlarmClock";
 
 	/**
 	 * mContext must be false for production. If true, turns on logging, test
@@ -605,7 +616,7 @@ public class MainFragment extends BaseFragment implements OnItemClickListener,
 		ListViewResizing();
 	}
 
-	static Handler ListViewResizingHandler = new Handler() {
+    public static Handler ListViewResizingHandler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
 			ListViewResizing();

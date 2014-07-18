@@ -1,4 +1,4 @@
-package com.provision.alarmemi.paper;
+package com.provision.alarmemi.paper.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -25,6 +25,9 @@ import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.provision.alarmemi.paper.R;
+import com.provision.alarmemi.paper.fragments.FragmentChangeActivity;
 
 public class ShowcaseView extends LinearLayout implements
 		OnGlobalLayoutListener, View.OnTouchListener {
@@ -65,7 +68,7 @@ public class ShowcaseView extends LinearLayout implements
 	static Button ok_btn;
 	static ShowcaseView sv;
 	static int showcaseHeight;
-	static boolean opened = false;
+	public static boolean opened = false;
 	static ViewGroup parent_;
 
 	public static ShowcaseView showShowcase(Context context, ViewGroup parent,

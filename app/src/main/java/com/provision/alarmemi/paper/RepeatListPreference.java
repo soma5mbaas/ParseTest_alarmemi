@@ -8,6 +8,8 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import com.provision.alarmemi.paper.fragments.SetAlarmFragment;
+
 public class RepeatListPreference extends CustomListPreference {
 	// Initial value that can be set with the values saved in the database.
 	private static Alarm.DaysOfWeek mDaysOfWeek = new Alarm.DaysOfWeek(0);
