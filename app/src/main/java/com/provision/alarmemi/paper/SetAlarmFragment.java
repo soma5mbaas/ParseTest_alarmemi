@@ -113,6 +113,11 @@ public class SetAlarmFragment extends SetAlarmPreferenceFragment implements
     
     static SetAlarmFragment mInstance;
 
+    public SetAlarmFragment setXmlId(int xmlId) {
+        setXmlIds(xmlId);
+        return this;
+    }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

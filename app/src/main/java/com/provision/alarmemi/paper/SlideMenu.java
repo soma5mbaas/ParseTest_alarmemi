@@ -90,7 +90,7 @@ public class SlideMenu extends Fragment {
                 mActivity.setAlarmGetIntent = new Intent();
 
                 if (SetAlarmFragment.isRunning) switchContent(null, true);
-                else switchContent(new SetAlarmFragment(), true);
+                else switchContent(new SetAlarmFragment().setXmlId(R.xml.alarm_prefs), true);
             }
         });
 

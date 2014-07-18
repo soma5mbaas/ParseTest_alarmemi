@@ -43,8 +43,8 @@ public class SetAlarmPreferenceFragment extends ListFragment{
     };
     private ListView lv;
     private int xmlId;
-     
-    public SetAlarmPreferenceFragment(int xmlId){
+
+    protected void setXmlIds(int xmlId){
         this.xmlId = xmlId;
     }
     //must be provided
@@ -70,8 +70,7 @@ public class SetAlarmPreferenceFragment extends ListFragment{
     @Override
     public void onCreate(Bundle b) {
         super.onCreate(b);
-        if(b != null)
-            xmlId = b.getInt("xml");
+        if(b != null) xmlId = b.getInt("xml");
         mPreferenceManager = onCreatePreferenceManager();
         root = (ViewGroup) LayoutInflater.from(getActivity()).inflate(R.layout.set_alarm, null);
         lv = (ListView) root.findViewById(android.R.id.list);
